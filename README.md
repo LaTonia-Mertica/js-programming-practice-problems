@@ -4,7 +4,9 @@
 
 **HOW IT WORKS**<br>
 
-###### _[coding style primer by amy nguyen](https://amy.dev/?p=783)_<br><br>
+###### _[coding style primer by amy nguyen](https://amy.dev/?p=783)_
+
+###### [technical interview prep courtesy jess b.](https://docs.google.com/document/d/1g9BkZOc2YSyYsa2q-qblXsXcvvU_xteuRt7IxTybAVU/edit)<br><br>
 
 - [epic practice problems list](https://paper.dropbox.com/doc/Programming-practice-problems-Qp6jAVBXAuDZWiz5x6r9J)
 - each problem in separate file
