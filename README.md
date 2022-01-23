@@ -60,6 +60,13 @@ readlines();
 <br>
 <br>
 
-###### what it feels like pursuing javascript: lm .v. js<br><br>
+> ##### This career path is about **_solving problems_** not coding.<br><br>Think about your problems. Try to forget code and syntax while figuring out a solution. The solving of the problem is the hardest part. Once you have a plan you will spend less time coding.<br><br>You will get stuck sometimes, walk away, take a break, let your mind work on it behind the scenes. You’ll be surprised when you come back and have a better approach.<br><br>Above all, DON’T GIVE UP!! You can do this!!!
+
+#### **jess | underdog devs**
+
+<br>
+<br>
 
 <img src="https://media.giphy.com/media/koPSBhdvbCD4c/giphy.gif" width="100%">
+
+###### what it feels like pursuing javascript: lm .v. js<br><br>
