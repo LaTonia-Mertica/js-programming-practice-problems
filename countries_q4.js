@@ -20,9 +20,10 @@ for (word of countriesArr) {
   }
   if (word.length === shortest_word.length) {
     equal_shortest_words.push(word);
-  }
+  } //inner loop ends here
+  // this console log illustrates the loop transitioning between initial to final shortest word
   console.log("INSIDE LOOP:", shortest_word);
-}
+} // outer loop ends here
 console.log("OUTSIDE LOOP:", shortest_word);
 console.log("SHORTEST WORDS OF EQUAL LENGTH:", equal_shortest_words);
 
