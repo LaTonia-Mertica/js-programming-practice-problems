@@ -57,6 +57,8 @@ readlines();
 
 ###### [- var, let, and const in javascript](https://medium.com/nerd-for-tech/var-let-and-const-in-javascript-15e41cf90f01)
 
+###### [- the .trim() method is solid for quick file cleanup](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)
+
 <br>
 <br>
 
