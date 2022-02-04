@@ -2,8 +2,8 @@ const fs = require("fs");
 const words = fs.readFileSync("sowpods.txt").toString("utf-8");
 const wordsByLine = words.split("\n");
 
-const readlines = () => {
-  let vowels_in_anyorder_words = [];
+const printWordsWithAllVowels = () => {
+  let vowelsInAnyOrderWords = [];
 
   for (const words of wordsByLine) {
     if (
@@ -13,13 +13,10 @@ const readlines = () => {
       words.includes("O") &&
       words.includes("U")
     ) {
-      vowels_in_anyorder_words.push(words);
+      vowelsInAnyOrderWords.push(words);
     }
   }
-  console.log(
-    "Words containing vowels in any order:",
-    vowels_in_anyorder_words
-  );
+  console.log("Words containing vowels in any order:", vowelsInAnyOrderWords);
 };
 
-readlines();
+printWordsWithAllVowels();

@@ -2,7 +2,7 @@ const fs = require("fs");
 const words = fs.readFileSync("sowpods.txt").toString("utf-8");
 const wordsByLine = words.split("\n");
 
-const readlines = () => {
+const log_y_startandend_words = () => {
   let y_startandend_words = [];
 
   for (const words of wordsByLine) {
@@ -16,4 +16,4 @@ const readlines = () => {
   );
 };
 
-readlines();
+log_y_startandend_words();
