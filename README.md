@@ -53,11 +53,17 @@ readlines();
 
 ###### [- appreciable benefits of mentoring ...](https://www.guider-ai.com/blog/mentoring-benefits)
 
+###### [- not enforced yet widely accepted js naming conventions](https://www.robinwieruch.de/javascript-naming-conventions/)
+
 ###### [- difference between undefined, not defined, and null in javascript](https://levelup.gitconnected.com/difference-between-undefined-and-not-defined-and-null-in-javascript-adfe38b3d2d)
 
 ###### [- var, let, and const in javascript](https://medium.com/nerd-for-tech/var-let-and-const-in-javascript-15e41cf90f01)
 
-###### [- the .trim() method is solid for quick file cleanup](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)
+###### [- reverse a string in 3 quick steps](https://www.geeksforgeeks.org/reverse-a-string-in-javascript/)
+
+###### [- official list of scrabble words aka sowpods](sowpods.txt)
+
+###### [- .trim() method is solid for quick file cleanup](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)
 
 <br>
 <br>
