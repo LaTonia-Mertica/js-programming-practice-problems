@@ -55,6 +55,8 @@ readlines();
 
 ###### [- not enforced yet widely accepted js naming conventions](https://www.robinwieruch.de/javascript-naming-conventions/)
 
+###### [- read intro through chapter 4 of Eloquent Javascript then reread](EloquentJavaScript.pdf)
+
 ###### [- difference between undefined, not defined, and null in javascript](https://levelup.gitconnected.com/difference-between-undefined-and-not-defined-and-null-in-javascript-adfe38b3d2d)
 
 ###### [- var, let, and const in javascript](https://medium.com/nerd-for-tech/var-let-and-const-in-javascript-15e41cf90f01)

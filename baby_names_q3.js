@@ -3,7 +3,7 @@ QUESTION: There is at least one baby name from the top 40 baby names for 2020 th
 
  SOLVE THIS IN TWO WAYS: first with an array to hold the Scrabble words, and then with a dictionary (or set) to hold the Scrabble words. Use timer functions to measure how long it takes to complete this work under each implementation. Why is the time different?
 
-SUDO CODE (INITIAL):
+PSEUDOCODE (INITIAL):
 - create array assigned to scrabble words
 - loop through baby names array
 - check each character of baby name AND track/store the characters
@@ -13,7 +13,7 @@ SUDO CODE (INITIAL):
 - console.log
 - invoke fn
 
-SUDO CODE (HINDSIGHT:
+PSEUDOCODE (HINDSIGHT):
 - assess scrabble words list (including understanding sowpods.txt previously provided for the wordplay challenges is the scrabble words list)
 - create empty array to house ultimate output
 - create function with descriptive fn name that reflects an action
