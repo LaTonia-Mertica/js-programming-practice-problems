@@ -1,146 +1,80 @@
-// Wordle is a word game that's been taking over the internet for the past few weeks!
-// You have to figure out what the 5 letter word of the day is. For each guess,
-// Wordle will show a different colored square for each letter in your guess:
-// - Black means the letter in this spot is NOT in the word
-// - Yellow means the letter in this spot is in the word but NOT in this position
-// - Green means the letter in this spot is correct! (Correct letter in correct position)
-// Let's write the function that will output a row of B/Y/G letters for a given guess.
-
-// INITIAL HELPER COMMENTS
-// the answer is "?????"
-// the guess is "stone"
-// this function should return "BYYGB"
-//Assert equal?
-
-// DEBUG TO DEFEND AGAINST REPEAT LETTERS
+// fn declared and assigned 2 parameters
 let calculate_wordle_score = function (answer, guess) {
+  // variable result assigned to empty string to store/return output
   let result = "";
+  // variable histogram assigned empty object to store/track characters/letters of answer and guess
+  let histogram = {};
 
+  // for loop to iterate through each letter of answer
+  for (let letter of answer) {
+    // if statement to check if letter of histogram exists
+    if (histogram[letter] === undefined) {
+      // histogram reassigned to start each letter at a count of zero if letter doesn't yet exist
+      histogram[letter] = 0;
+    }
+    // otherwise histogram is to increment by one for each appearance of each letter
+    histogram[letter]++;
+  }
+
+  // for loop to iterate through the length of characters in guess
   for (i = 0; i < guess.length; i++) {
+    // if statement to check if character in guess is at same position as character in answer
     if (guess[i] === answer[i]) {
+      // if yes add a letter g to that character position/index
       result += "g";
-    } else if (answer.includes(guess[i]) && guess[i] !== answer[i]) {
+      // and remove one allowance/count from the histogram for that character
+      histogram[answer[i]]--;
+      // otherwise check if answer includes current character in guess AND if current character in guess does not match current character in answer AND if current character in guess in the histogram is greater than zero - meaning it already exists
+    } else if (
+      answer.includes(guess[i]) &&
+      guess[i] !== answer[i] &&
+      histogram[guess[i]] > 0
+    ) {
+      // when all 3 parts of previous condition are met add a letter y to that character position/index
       result += "y";
+      // and remove one allowance/count from the histogram for that character
+      histogram[guess[i]]--;
+      // otherwise the only other option is that the letter/character is not in the answer and a letter b can be added to that character position/index
     } else {
       result += "b";
     }
   }
+  // return the result to allow output of result
   return result;
 };
 
-let word_contains_letter = function (guess, letter) {
-  if (guess.includes(letter)) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-// ggggg
+// console log
 console.log(
   "EXPECTED OUTPUT 'GGGGG': ",
   calculate_wordle_score("tongs", "tongs")
 );
-//yyyyy
+
 console.log(
   "EXPECTED OUTPUT 'YYYYY': ",
   calculate_wordle_score("tongs", "gnost")
 );
-// bbbbb
+
 console.log(
   "EXPECTED OUTPUT 'BBBBB': ",
   calculate_wordle_score("tongs", "whack")
 );
 
-// yyyyb
 console.log(
   "EXPECTED OUTPUT 'YYYYB': ",
   calculate_wordle_score("tongs", "osgte")
 );
-// gggby
+
 console.log(
   "EXPECTED OUTPUT 'GGGBY': ",
   calculate_wordle_score("wheel", "where")
 );
-// ggbbg
+
 console.log(
   "EXPECTED OUTPUT 'GGBBG': ",
   calculate_wordle_score("tongs", "tools")
 );
-//yybyg
+
 console.log(
   "EXPECTED OUTPUT 'YYBYG': ",
   calculate_wordle_score("tongs", "gnats")
 );
-
-// SUDO CODE TO OUTLINE NEEDED STEPS/CODE FOR "Y" USE CASE
-// check guess for multiple occurences of same letter
-// store multiple occurences of same letter
-// output "y" for all occurences of same letter
-// let charOccurence = function (guess, letter) {
-//   for (let char = 0; char < guess.length; char++) {
-//     if (guess[char] === letter) charOccurence.push(guess[char] + 1);
-//   }
-//   return charOccurence;
-// };
-
-/* COMMENTS TO FOCUS ON STEPS/CODE NEEDED FOR "Y" USE CASE
-  is the letter in there and not already used
-  remove the includes function and go thru each letter and check if answer at [i] is equal to my letter and not equal to the letter in the guess at that index
-  */
-
-/* COMMENTS TO FOCUS ON STEPS/CODE NEEDED FOR BASIC USE CASES
-  for loop for each letter/character in the guess
-  if statement to check for matching letters (ggggg)
-  if statement to check if letter included (yyyyy)
-  if statement for no matches (bbbbb)
-  variable assigned to empty string
-  add to empty string each letter/character
-  return result
-  */
-
-// MISC WORDED VISUALIZATIONS TO TRY TO UNDERSTAND THE PROBLEM
-// check each letter of guess
-// compare each letter of guess to answer
-// output 'b' 'y' 'g' for status
-
-// let charPos = "b" || "y" || "g";
-// let black = "not in this word";
-// let yellow = "in word but different position";
-// let green = "in word in this position";
-// guess.split('').filter(guess => answer.includes(guess)).length === 0 or "B"
-// guess.toLowerCase().split("").join("").match(/(.)\1+/g).length;
-
-// answer.indexof() === guess.indexof()
-
-// answer.charAt(0) === guess.charAt(0);
-// answer.charAt(1) === guess.charAt(1);
-// answer.charAt(2) === guess.charAt(2);
-// answer.charAt(3) === guess.charAt(3);
-// answer.charAt(4) === guess.charAt(4);
-
-// if (answer.charAt() === guess.charAt()) {
-//   return "G"
-// } else if (answer.charAt() !== guess.charAt()) && guess.includes(answer 'characters') {
-//   return "Y"
-// } else (answer.charAt() !== guess.charAt()) && !guess.includes(answer 'characters') {
-//   return "letter not found"
-// }
-
-// CODE/FUNCTIONS TO PRACTICE DEBUG CONSOLE MORE EFFICIENTLY
-// let firstfunction = function (x) {
-//   console.log(x);
-// };
-
-// let secondfunction = function (x) {
-//   console.log(x * 2);
-//   firstfunction(3);
-// };
-
-// let mainfunction = function (x, y) {
-//   firstfunction(5);
-//   secondfunction(5);
-//   secondfunction(10);
-// };
-
-// mainfunction(1, 1);
