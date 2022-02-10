@@ -34,6 +34,7 @@ const namesStr = fs
   .toString("utf-8")
   .trim();
 const namesArr = namesStr.toUpperCase().split("\n");
+
 const scrabbleWordsStr = fs
   .readFileSync("sowpods.txt")
   .toString("utf-8")
@@ -44,20 +45,56 @@ const scrabbleWordsArr = scrabbleWordsStr.toUpperCase().split("\n");
 // const stringEx = "Example";
 // console.log(stringEx.split("").reverse().join("").toUpperCase());
 
-const namesValidScrabbleWords = [];
+// array
+let namesValidScrabbleWordsArray = [];
+let namesValidScrabbleWordsArrayReversed = [];
 
-const showNamesValidScrabbleWords = () => {
-  for (const name of namesArr) {
-    for (const word of scrabbleWordsArr) {
+const showNamesValidScrabbleWordsArray = () => {
+  for (let name of namesArr) {
+    for (let word of scrabbleWordsArr) {
       if (name.split("").reverse().join("").toUpperCase() === word) {
-        namesValidScrabbleWords.push(name);
+        namesValidScrabbleWordsArray.push(name);
+        namesValidScrabbleWordsArrayReversed.push(
+          name.split("").reverse().join("").toUpperCase()
+        );
       }
     }
   }
   console.log(
-    "NAMES THAT ARE VALID SCRABBLE WORDS WHEN READ BACKWARDS: ",
-    namesValidScrabbleWords
+    "ARRAY METHOD TO NAMES THAT ARE VALID SCRABBLE WORDS WHEN READ BACKWARDS: ",
+    namesValidScrabbleWordsArray
+  );
+  console.log(
+    "REVERSE READ OF NAMES THAT ARE VALID SCRABBLE WORDS WHEN READ BACKWARDS: ",
+    namesValidScrabbleWordsArrayReversed
   );
 };
+showNamesValidScrabbleWordsArray();
 
-showNamesValidScrabbleWords();
+// dictionary
+let namesValidScrabbleWordsDictionary = {};
+let namesValidScrabbleWordsDictionaryReversed = {};
+const showNamesValidScrabbleWordsDictionary = () => {
+  for (let name of namesArr) {
+    namesArr[name] = name;
+    for (let word of scrabbleWordsArr) {
+      if (name.split("").reverse().join("").toUpperCase() === word) {
+        namesValidScrabbleWordsDictionary[namesArr[name]]++;
+        namesValidScrabbleWordsDictionaryReversed[
+          namesArr[name.split("").reverse().join("").toUpperCase()]
+        ]++;
+      }
+    }
+  }
+  console.log(
+    "DICTIONARY METHOD TO NAMES THAT ARE VALID SCRABBLE WORDS WHEN READ BACKWARDS: ",
+    namesValidScrabbleWordsDictionary
+  );
+  console.log(
+    "REVERSE READ OF NAMES THAT ARE VALID SCRABBLE WORDS WHEN READ BACKWARDS: ",
+    namesValidScrabbleWordsDictionaryReversed
+  );
+};
+showNamesValidScrabbleWordsDictionary();
+
+// AREAS TO ADDRESS 1) get reversed name in dictionary to display, 2) remove NaN from dictionary outputs, 3) add timers
