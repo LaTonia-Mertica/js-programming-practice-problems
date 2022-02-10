@@ -73,28 +73,29 @@ showNamesValidScrabbleWordsArray();
 
 // dictionary
 let namesValidScrabbleWordsDictionary = {};
-let namesValidScrabbleWordsDictionaryReversed = {};
+let namesReverseReadDictionary = {};
+
 const showNamesValidScrabbleWordsDictionary = () => {
   for (let name of namesArr) {
     namesArr[name] = name;
     for (let word of scrabbleWordsArr) {
       if (name.split("").reverse().join("").toUpperCase() === word) {
         namesValidScrabbleWordsDictionary[namesArr[name]]++;
-        namesValidScrabbleWordsDictionaryReversed[
-          namesArr[name.split("").reverse().join("").toUpperCase()]
+        namesReverseReadDictionary[
+          name.split("").reverse().join("").toUpperCase()
         ]++;
       }
     }
   }
   console.log(
-    "DICTIONARY METHOD TO NAMES THAT ARE VALID SCRABBLE WORDS WHEN READ BACKWARDS: ",
+    "\nDICTIONARY METHOD TO NAMES THAT ARE VALID SCRABBLE WORDS WHEN READ BACKWARDS: ",
     namesValidScrabbleWordsDictionary
   );
   console.log(
     "REVERSE READ OF NAMES THAT ARE VALID SCRABBLE WORDS WHEN READ BACKWARDS: ",
-    namesValidScrabbleWordsDictionaryReversed
+    namesReverseReadDictionary
   );
 };
 showNamesValidScrabbleWordsDictionary();
 
-// AREAS TO ADDRESS 1) get reversed name in dictionary to display, 2) remove NaN from dictionary outputs, 3) add timers
+// AREAS TO ADDRESS 1) remove NaN from dictionary outputs, 3) add timers
