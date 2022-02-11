@@ -41,6 +41,11 @@ const scrabbleWordsStr = fs
   .trim();
 const scrabbleWordsArr = scrabbleWordsStr.toUpperCase().split("\n");
 
+const scrabbleWordsDict = {};
+for (let word of scrabbleWordsArr) {
+  scrabbleWordsDict[word] = "";
+}
+
 // simple test case to get reverse working
 // const stringEx = "Example";
 // console.log(stringEx.split("").reverse().join("").toUpperCase());
@@ -69,21 +74,29 @@ const showNamesValidScrabbleWordsArray = () => {
     namesValidScrabbleWordsArrayReversed
   );
 };
+var start = new Date().getTime();
 showNamesValidScrabbleWordsArray();
+var end = new Date().getTime();
+console.log(end - start);
 
 // dictionary
-let namesValidScrabbleWordsDictionary = {};
-let namesReverseReadDictionary = {};
+let namesValidScrabbleWordsDictionary = [];
+let namesReverseReadDictionary = [];
 
 const showNamesValidScrabbleWordsDictionary = () => {
   for (let name of namesArr) {
-    namesArr[name] = name;
-    for (let word of scrabbleWordsArr) {
+    // namesArr[name] = name;
+    for (let word in scrabbleWordsDict) {
       if (name.split("").reverse().join("").toUpperCase() === word) {
-        namesValidScrabbleWordsDictionary[namesArr[name]]++;
-        namesReverseReadDictionary[
+        // namesValidScrabbleWordsDictionary[namesArr[name]]++;
+        // namesReverseReadDictionary[
+        //   name.split("").reverse().join("").toUpperCase()
+        // ]++;
+
+        namesValidScrabbleWordsDictionary.push(name);
+        namesReverseReadDictionary.push(
           name.split("").reverse().join("").toUpperCase()
-        ]++;
+        );
       }
     }
   }
@@ -96,6 +109,9 @@ const showNamesValidScrabbleWordsDictionary = () => {
     namesReverseReadDictionary
   );
 };
+var start = new Date().getTime();
 showNamesValidScrabbleWordsDictionary();
+var end = new Date().getTime();
+console.log(end - start);
 
 // AREAS TO ADDRESS 1) remove NaN from dictionary outputs, 3) add timers
