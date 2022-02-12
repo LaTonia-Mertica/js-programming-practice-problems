@@ -67,6 +67,8 @@ readlines();
 
 ###### [- .trim() method is solid for quick file cleanup](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)
 
+###### [- level up your code/web dev portfolio](https://www.freecodecamp.org/news/level-up-developer-portfolio/)
+
 <br>
 <br>
 
