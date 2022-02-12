@@ -53,6 +53,8 @@ readlines();
 
 ###### [- appreciable benefits of mentoring ...](https://www.guider-ai.com/blog/mentoring-benefits)
 
+###### [- how javascript works behind the scenes](https://www.freecodecamp.org/news/execution-context-how-javascript-works-behind-the-scenes)
+
 ###### [- not enforced yet widely accepted js naming conventions](https://www.robinwieruch.de/javascript-naming-conventions/)
 
 ###### [- read intro through chapter 4 of Eloquent Javascript then reread](EloquentJavaScript.pdf)
