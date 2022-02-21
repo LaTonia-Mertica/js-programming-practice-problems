@@ -96,7 +96,7 @@ function removeSomethingSpecific(obj) {
 console.log("REMOVE SOMETHING SPECIFIC: ", removeSomethingSpecific());
 
 // REMOVE SOMETHING SPECIFIC FROM OBJECT USING Array.isArray FUNCTION
-function removeSomethingSpecific(obj) {
+function removeSomethingSpecificUsingArrayIsArray(obj) {
   for (let key in obj) {
     if (Array.isArray(obj[key]) === true) {
       delete obj[key];
@@ -105,7 +105,7 @@ function removeSomethingSpecific(obj) {
 }
 console.log(
   "REMOVE SOMETHING SPECIFIC FROM OBJECT USING Array.isArray: ",
-  removeSomethingSpecific()
+  removeSomethingSpecificUsingArrayIsArray()
 );
 
 // REMOVE STRING VALUES FUNCTION
@@ -127,7 +127,7 @@ function countNumberOfKeys(obj) {
   }
   return count;
 }
-console.log("COUNT NUMBER OF KEYS: ", removeStringValues());
+console.log("COUNT NUMBER OF KEYS: ", countNumberOfKeys());
 
 // SELECT ARRAY IN OBJECT FUNCTION
 function select(arr, obj) {
@@ -140,4 +140,14 @@ function select(arr, obj) {
   }
   return result;
 }
-console.log("SELECT ARRAY IN OBJECT: ", removeStringValues());
+console.log("SELECT ARRAY IN OBJECT: ", select());
+
+// EXTEND OBJECT FUNCTION
+function extend(obj1, obj2) {
+  for (let obj2Key in obj2) {
+    if (obj1[obj2Key] === undefined) {
+      obj1[obj2Key] = obj2[obj2Key];
+    }
+  }
+}
+console.log("EXTEND OBJECT: ", extend());
