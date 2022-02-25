@@ -1,0 +1,31 @@
+**basic exercises that build up to larger exercises/outcomes
+
+animals = ["dog", "cat", "kangaroo", "dog", "dog"]
+animalsDict = {}
+
+// values of each after first iteration
+i = 0
+key = dog
+count = 1
+...
+
+i = 1
+key = cat
+count = 2
+...
+
+i = 2
+key = kangaroo
+i = 3
+key = dog
+i = 4
+key = dog
+
+
+
+
+
+
+
+
+
