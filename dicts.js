@@ -37,7 +37,7 @@ function countWords(str) {
   }
   return result;
 }
-console.log("COUNTED WORDS: ", countWords("LaTonia Mertica"));
+// console.log("COUNTED WORDS: ", countWords("LaTonia Mertica"));
 
 // COUNT MORE WORDS FUNCTION
 function countMoreWords(str) {
@@ -56,7 +56,7 @@ function countMoreWords(str) {
   }
   return obj;
 }
-console.log("MORE COUNTED WORDS: ", countMoreWords("LaTonia Mertica"));
+// console.log("MORE COUNTED WORDS: ", countMoreWords("LaTonia Mertica"));
 
 // REMOVE GREATER THAN FUNCTION
 function removeNumberGreaterThan(num, obj) {
@@ -68,7 +68,7 @@ function removeNumberGreaterThan(num, obj) {
     }
   }
 }
-console.log("REMOVE GREATER THAN: ", removeNumberGreaterThan());
+// console.log("REMOVE GREATER THAN: ", removeNumberGreaterThan());
 
 // REMOVE STRING VALUE LONGER THAN FUNCTION
 function removeStringValueGreaterThan(num, obj) {
@@ -80,10 +80,10 @@ function removeStringValueGreaterThan(num, obj) {
     }
   }
 }
-console.log(
-  "REMOVE STRING VALUE GREATER THAN: ",
-  removeStringValueGreaterThan("LaTonia Mertica")
-);
+// console.log(
+//   "REMOVE STRING VALUE GREATER THAN: ",
+//   removeStringValueGreaterThan("LaTonia Mertica")
+// );
 
 // REMOVE SOMETHING SPECIFIC FROM OBJECT FUNCTION
 function removeSomethingSpecific(obj) {
@@ -93,7 +93,7 @@ function removeSomethingSpecific(obj) {
     }
   }
 }
-console.log("REMOVE SOMETHING SPECIFIC: ", removeSomethingSpecific());
+// console.log("REMOVE SOMETHING SPECIFIC: ", removeSomethingSpecific());
 
 // REMOVE SOMETHING SPECIFIC FROM OBJECT USING Array.isArray FUNCTION
 function removeSomethingSpecificUsingArrayIsArray(obj) {
@@ -103,10 +103,10 @@ function removeSomethingSpecificUsingArrayIsArray(obj) {
     }
   }
 }
-console.log(
-  "REMOVE SOMETHING SPECIFIC FROM OBJECT USING Array.isArray: ",
-  removeSomethingSpecificUsingArrayIsArray()
-);
+// console.log(
+//   "REMOVE SOMETHING SPECIFIC FROM OBJECT USING Array.isArray: ",
+//   removeSomethingSpecificUsingArrayIsArray()
+// );
 
 // REMOVE STRING VALUES FUNCTION
 function removeStringValues(obj) {
@@ -116,7 +116,7 @@ function removeStringValues(obj) {
     }
   }
 }
-console.log("REMOVE STRING VALUES: ", removeStringValues("Seven"));
+// console.log("REMOVE STRING VALUES: ", removeStringValues("Seven"));
 
 // COUNT NUMBER OF KEYS FUNCTION
 function countNumberOfKeys(obj) {
@@ -127,7 +127,7 @@ function countNumberOfKeys(obj) {
   }
   return count;
 }
-console.log("COUNT NUMBER OF KEYS: ", countNumberOfKeys());
+// console.log("COUNT NUMBER OF KEYS: ", countNumberOfKeys());
 
 // SELECT ARRAY IN OBJECT FUNCTION
 function select(arr, obj) {
@@ -140,7 +140,7 @@ function select(arr, obj) {
   }
   return result;
 }
-console.log("SELECT ARRAY IN OBJECT: ", select());
+// console.log("SELECT ARRAY IN OBJECT: ", select());
 
 // EXTEND OBJECT FUNCTION
 function extend(obj1, obj2) {
@@ -150,4 +150,80 @@ function extend(obj1, obj2) {
     }
   }
 }
-console.log("EXTEND OBJECT: ", extend());
+// console.log("EXTEND OBJECT: ", extend());
+
+// FOR LOOP NESTED OBJECTS AKA DICTS IN AN ARRAY
+let employees = [
+  {
+    name: "Hunny Bunny",
+    age: 3,
+    job: "Cute Rompabout",
+  },
+  {
+    name: "Duece Jones",
+    age: 17,
+    job: "Unpredictably Needy Young Adult",
+  },
+  {
+    name: "Mista Shills",
+    age: 52,
+    job: "Unassuming Mature Audience Member",
+  },
+];
+
+for (let i = 0; i < employees.length; i++) {
+  // console.log(employees[i].job);
+}
+
+// FOR LOOP WITH NESTED FOR IN LOOP USING NESTED OBJECTS AKA DICTS IN AN ARRAY
+let workers = [
+  {
+    alias: "\nGypsy Jim",
+    activeYears: 13,
+    pastime: "volunteering",
+  },
+  {
+    alias: "\nPoet Maire",
+    activeYears: 7,
+    pastime: "oration",
+  },
+  {
+    alias: "\nDavid Jerome",
+    activeYears: 30,
+    pastime: "avid father",
+  },
+];
+
+for (let i = 0; i < workers.length; i++) {
+  for (let key in workers[i]) {
+    // console.log(workers[i][key]);
+  }
+}
+
+// FUNCTION TO RATE RESTAURANTS USING OBJECTS AKA DICTS AND ARRAYS
+function restaurantRating(village) {
+  let ratingsObj = {};
+  let best = village[0];
+  let good = [];
+  let ratings = 0;
+
+  for (let i = 0; i < village.length; i++) {
+    if (village[i].rating > best.rating) {
+      best = village[i];
+    }
+    if (village[i] >= 90) {
+      good.push(village[i].name);
+    }
+    ratings += village[i].rating;
+  }
+
+  ratingsObj.best = best.name;
+  ratingsObj.good = good;
+  let avg = ratings / village.length;
+  ratingsObj.avg = avg;
+
+  return ratingsObj;
+}
+
+// let myRatings = restaurantRating(myVillage);
+// console.log(myRatings);
