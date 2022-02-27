@@ -15,11 +15,20 @@ winners array include each team being iterated over
 [x] when winners array contains non winner team name skip that team/do not include that team
 [x] otherwise push team name into new real state for expected/sought output
 [x] outside of any loop, console log that new real estate that now contains the teams that never won even though they've playe at the nba finals
+[x] defend against edge case of multiple occurrences of single team name in output ... output just one occurrence
 
 HELPFUL HINTS
 --- const nbaFinalsResults = { winners: [], loser: []}
 --- nbaFinalsResults.loser.push()
 
+--- array best use case is when a) working with indices,  b) when duplicates, c) when order matters
+--- array non ideal use case a) accessing by name, b) need unique output, c) need to check if something exists
+
+
+--- dict best use case a) access by name/key, b) when working with key-value pairs ...
+
+
+--- sets best use case a) when need unique outputs, b) checking if something exists
 */
 
 // require file system to make capability possible for reading file
@@ -31,7 +40,8 @@ const nbaResultsArr = nbaResultsStr.split("\r\n");
 
 // dictionary to track/store the data
 let nbaFinalsResults = { winners: [], nonWinners: [] };
-let newTeamsArr = [];
+// let newTeamsArr = [];
+let newTeamsDict = {};
 
 for (let row of nbaResultsArr) {
   let element = row.split(",");
@@ -44,7 +54,8 @@ for (let team of nbaFinalsResults["nonWinners"]) {
   if (nbaFinalsResults["winners"].includes(team)) {
     continue;
   } else {
-    newTeamsArr.push(team);
+    // newTeamsArr.push(team);
+    newTeamsDict[team] = "😞";
   }
 }
-console.log(newTeamsArr);
+console.log(Object.keys(newTeamsDict));
