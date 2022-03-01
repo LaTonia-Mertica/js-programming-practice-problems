@@ -227,3 +227,150 @@ function restaurantRating(village) {
 
 // let myRatings = restaurantRating(myVillage);
 // console.log(myRatings);
+
+// TRANSFORM FIRST AND LAST
+// example output
+// {
+//   Kevin : 'Coleman'
+// }
+array = ["Kevin", "Bacon", "Love", "Hart", "Costner", "Coleman"];
+function transformFirstAndLast(array) {
+  // create empty object
+  // access each element in array
+  // set first element in array as key
+  // return object with key that has values of elements in array
+
+  let resultDict = {};
+
+  for (let i = 0; i < array.length; i++) {
+    let key = array[0];
+    resultDict[key] = array[i];
+  }
+  return resultDict;
+}
+
+// OBJECT TO ARRAY OF KEYS ONLY
+// expected output
+// ['name', 'age', 'hasPets']
+let input = {
+  name: "Sam",
+  age: 25,
+  hasPets: true,
+};
+function getAllKeys(obj) {
+  // create empty array
+  // access keys in object
+  // add keys to array
+
+  let resultArray = [];
+  for (let key in obj) {
+    resultArray.push(key);
+  }
+  return resultArray;
+}
+
+// ARRAY OF ARRAYS TO OBJECT
+// expected outcome
+// {
+//   make : 'Ford',
+//   model : 'Mustang',
+//   year : 1964
+// }
+let input = [
+  ["make", "Ford"],
+  ["model", "Mustang"],
+  ["year", 1964],
+];
+
+function transformArrayToObject(array) {
+  // create empty object
+  // access elements in array
+  // set first element in any given array to key in object
+  // set second element in any given array to value in object
+  // return object with elements as key-value pairs
+
+  let outcomeDict = {};
+
+  for (let i = 0; i < array.length; i++) {
+    let key = array[i][0];
+    let value = array[i][1];
+    outcomeDict[key] = value;
+  }
+  return outcomeDict;
+}
+
+// RETURN OBJECT VALUES IN ARRAY
+// expected output
+// ['Krysten', 33, false]
+let input = {
+  name: "Krysten",
+  age: 33,
+  hasPets: false,
+};
+
+function listAllValues(obj) {
+  // create empty array
+  // access properties of object
+  // declare value
+  // add values to array
+
+  let outcomeArray = [];
+
+  for (let key in obj) {
+    let value = obj[key];
+    outcomeArray.push(value);
+  }
+  return outcomeArray;
+}
+
+// TRANSFORM NESTED ARRAYS INTO NESTED OBJECTS
+// expected output
+// [
+//   {firstName: 'Joe', lastName: 'Blow', age: 42, role: 'clerk'},
+//   {firstName: 'Mary', lastName: 'Jenkins', age: 36, role: 'manager'}
+// ]
+
+let input = [
+  [
+    ["firstName", "Joe"],
+    ["lastName", "Blow"],
+    ["age", 42],
+    ["role", "clerk"],
+  ],
+  [
+    ["firstName", "Mary"],
+    ["lastName", "Jenkins"],
+    ["age", 36],
+    ["role", "manager"],
+  ],
+];
+
+function transformEmployeeData(employeeData) {
+  // create empty dict
+  // access elements in array of arrays
+  // set first element of any given array as object key
+  // set second element of any given array as object value
+  // add properties to object as nested objects
+  // return object
+
+  let outcome = employeeData.map((x) => Object.fromEntries(x));
+  return outcome;
+}
+
+// TRANSFORM SINGLE OBJECT TO NESTED ARRAYS
+// expected output
+// [['name', 'Holly'], ['age', 35], ['role', 'producer']]
+let input = {
+  name: "Holly",
+  age: 35,
+  role: "producer",
+};
+
+function convertObjectToArray(obj) {
+  // create empty array
+  // access properties of object
+  // add object props into array as nested arrays
+
+  let output = Object.keys(obj).map((i) => [i, obj[i]]);
+  return output;
+}
