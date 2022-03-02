@@ -30,10 +30,18 @@ for (let row of topMoviesArr) {
   // distributorsDict["distributor"] = movieTitle;
   // distributorsDict["title"] = movieTitle;
   // test access to distributors dict properties
-  console.log("\nDISTRIBUTORS\n", distributorsDict);
+  // console.log("\nDISTRIBUTORS\n", distributorsDict);
 
   // output with key of distributor and value of movies
   distributorsDict[distributor] = movieTitle;
-  console.log("\n MOVIE TITLES BY DISTRIBUTOR\n", distributorsDict);
+  // console.log("\n MOVIE TITLES BY DISTRIBUTOR\n", distributorsDict);
+
+  if (
+    distributor === "DREAMWORKS" ||
+    distributor === "DREAMWORKS DISTRUBUTION"
+  ) {
+    dreamWorksMovies.push(movieTitle);
+  }
 }
-// console.log(dreamWorksMovies);
+
+console.log("\nMOVIES DISTRIBUTED BY DREAMWORKS\n", dreamWorksMovies);
