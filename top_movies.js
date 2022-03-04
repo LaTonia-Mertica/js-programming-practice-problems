@@ -4,97 +4,58 @@ const fs = require("fs");
 // convert data to strings
 const topMoviesStr = fs.readFileSync("top_movies.csv").toString("utf-8");
 // separate data in strings by commas
+// const topMoviesArr = topMoviesStr.trim().toUpperCase().split("\r\n");
 const topMoviesArr = topMoviesStr.toUpperCase().split("\r\n");
 
 /*
 QUESTION 1 OF 5
 - What movies on this list were distributed by DreamWorks? 
  */
-let distributorsDict = {};
 let dreamWorksMovies = [];
 
 for (let row of topMoviesArr) {
   let element = row.split(",");
   let movieTitle = element[0];
-  // test access to movie titles
-  // console.log(movieTitle);
   let distributor = element[1];
-  // test access to distributors
-  // console.log(distributor);
+  // confirm datatype
+  // console.log(typeof distributor);
 
-  distributorsDict["distributor"] = distributor;
-  // distributorsDict["distributor"] = movieTitle;
-  // distributorsDict["title"] = movieTitle;
-  // test access to distributors dict properties
-  // console.log("\nDISTRIBUTORS\n", distributorsDict);
-
-  // output with key of distributor and value of movies
-  distributorsDict[distributor] = movieTitle;
-  // console.log("\n MOVIE TITLES BY DISTRIBUTOR\n", distributorsDict);
-
-  if (
-    distributor === "DREAMWORKS" ||
-    distributor === "DREAMWORKS DISTRUBUTION"
-  ) {
+  if (distributor.includes("DREAMWORKS")) {
     dreamWorksMovies.push(movieTitle);
   }
 }
-console.log("\nMOVIES DISTRIBUTED BY DREAMWORKS\n", dreamWorksMovies);
+console.log(
+  "\nMOVIES DISTRIBUTED BY DREAMWORKS INCLUDES CODE\n",
+  dreamWorksMovies
+);
 
 /*
 QUESTION 2 OF 5
 - What is the highest grossing moving from Universal Pictures, domestically?
  */
-let distributorsDict2 = {};
-let universalPicturesMovies = [];
-let universalPicturesDomesticSales = [];
-let universalPicturesHighestGrossingDomesticMovie;
+const highestGrossingDomesticMovie = {
+  sales: 0,
+  movieTitle: "",
+};
 
 for (let row of topMoviesArr) {
-  let element1 = row.split(",");
-  let distributor2 = element1[1];
-  let movieTitle2 = element1[0];
-  let domesticSales = element1[3];
+  let element = row.split(",");
+  let distributor = element[1];
+  let movieTitle = element[0];
+  let domesticSales = parseInt(element[3]);
 
-  distributorsDict2["distributor2"] = distributor2;
-  // test data access
-  // console.log(distributorsDict2);
-  distributorsDict2["distributor2"] = movieTitle2;
-  // test data access
-  // console.log(distributorsDict2);
-  distributorsDict2["distributor2"] = domesticSales;
-  // test data access
-  // console.log(distributorsDict2);
-  distributorsDict2[distributor2] = movieTitle2 + "," + domesticSales;
-  // test data access
-  // console.log(distributorsDict2);
-
-  if (distributor2 === undefined) {
-    continue;
-  }
-
-  if (distributor2 === "UNIVERSAL PICTURES") {
-    universalPicturesMovies.push(movieTitle2);
-  }
-
-  if (distributor2 === "UNIVERSAL PICTURES") {
-    universalPicturesDomesticSales.push(domesticSales);
-    universalPicturesHighestGrossingDomesticMovie = Math.max.apply(
-      null,
-      topMoviesArr
-    );
-    universalPicturesHighestGrossingDomesticMovie = movieTitle2;
+  if (distributor === "UNIVERSAL PICTURES") {
+    if (domesticSales > highestGrossingDomesticMovie.sales) {
+      highestGrossingDomesticMovie.sales = domesticSales;
+      highestGrossingDomesticMovie.movieTitle = movieTitle;
+    }
   }
 }
-// console.log("\nUNIVERSAL PICTURES MOVIES\n", universalPicturesMovies);
-// console.log(
-//   "\nUNIVERSAL PICTURES DOMESTIC SALES\n",
-//   universalPicturesDomesticSales
-// );
 console.log(
   "\nUNIVERSAL PICTURES HIGHEST GROSSING DOMESTIC MOVIE\n" +
-    "🧸" +
-    universalPicturesHighestGrossingDomesticMovie +
+    "🦖" +
+    highestGrossingDomesticMovie.movieTitle +
+    " 🌍" +
     "\n"
 );
 
@@ -102,27 +63,96 @@ console.log(
 QUESTION 3 OF 5
 - What distributor has the most films on this list?
  */
-let distributorsDict3 = {};
-let allFilms = [];
-let distributorWithMostFilms = "";
+let distributorsDict = {};
+let countOfFilmsByDistributor = 0;
 
 for (let row of topMoviesArr) {
-  let element2 = row.split(",");
-  let distributor3 = element2[1];
-  let movieTitle3 = element2[0];
+  let element = row.split(",");
+  let distributor = element[1];
+  let movieTitle = element[0];
 
-  distributorsDict3[distributor3] = movieTitle3;
-  // test data access
-  // console.log(distributorsDict3);
+  // pseudocode for expected output
+  // read distributor and add them to dict if not in dict already
+  // otherwise increment distributor count by one for each count
+  // output the distributor who has hightest count
+  // dict = {
+  //  distributor: 37
+  //}
 
-  // CODE CONDITIONS ETC TO GET OUTPUT
+  if (distributorsDict[distributor] === undefined) {
+    distributorsDict[distributor] = 1;
+  } else {
+    distributorsDict[distributor]++;
+  }
 }
-console.log("\nDISTRIBUTOR WITH MOST FILMS LISTED\n", distributorWithMostFilms);
+
+let largestDistributor = "";
+let largestDistributorCount = 0;
+for (let key in distributorsDict) {
+  if (typeof largestDistributor === "string") {
+    largestDistributor = key;
+  }
+  if (distributorsDict[key] > largestDistributorCount) {
+    largestDistributorCount = distributorsDict[key];
+    distributorWithMostFilms = largestDistributor;
+  }
+}
+console.log(
+  "\nDISTRIBUTOR WITH MOST FILMS LISTED\n" + "🎥" + distributorWithMostFilms
+);
 
 /*
 QUESTION 4 OF 5       
 - What is the earliest year on this list, and what were the films from that year?
  */
+// expected output
+// const filmsFromEarliestYearListed = {
+//   earliestYearAsNumber: ["movie0", "movie1", "movie2"],
+// };
+
+let earliestYearListed = 9999;
+const filmsFromEarliestYearListed = {};
+let specifiedYear = "1975";
+
+for (let row of topMoviesArr) {
+  let element = row.split(",");
+  let year = element[2];
+  let film = element[0];
+
+  if (!(year in filmsFromEarliestYearListed)) {
+    filmsFromEarliestYearListed[year] = [];
+  }
+  filmsFromEarliestYearListed[year].push(film);
+}
+
+for (let year in filmsFromEarliestYearListed) {
+  // test data access
+  // console.log(year);
+  // console.log(filmsFromEarliestYearListed[year]);
+  if (typeof year === "string") {
+    year = parseInt(year);
+  }
+  if (year < earliestYearListed) {
+    earliestYearListed = year;
+  }
+}
+console.log(
+  "\nEARLIEST YEAR LISTED: ",
+  earliestYearListed +
+    "👸" +
+    "\n" +
+    "film from earliest year listed\n*******************************\n" +
+    filmsFromEarliestYearListed[earliestYearListed]
+);
+console.log(
+  "\nSPECIFIED YEAR: ",
+  specifiedYear +
+    "\n" +
+    "film(s) from specified year \n*******************************\n" +
+    filmsFromEarliestYearListed[specifiedYear] +
+    "🦈" +
+    "\n"
+);
 
 /*
 QUESTION 5 OF 5        
