@@ -64,12 +64,10 @@ QUESTION 3 OF 5
 - What distributor has the most films on this list?
  */
 let distributorsDict = {};
-let countOfFilmsByDistributor = 0;
 
 for (let row of topMoviesArr) {
   let element = row.split(",");
   let distributor = element[1];
-  let movieTitle = element[0];
 
   // pseudocode for expected output
   // read distributor and add them to dict if not in dict already
