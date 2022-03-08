@@ -43,6 +43,7 @@ console.log("\nPUSH METHOD APPENDS/ADDS TO BACK OF ARRAY\n", fruitsArr);
 // - Delete the last item in the array
 fruitsArr.pop();
 console.log("\nPOP METHOD DELETES LAST ARRAY ITEM\n", fruitsArr);
+console.log("\n");
 
 // --------------------------------------------------------------------------
 // PROBLEM SET 2: DICTIONARIES (aka javascript objects)
@@ -57,19 +58,74 @@ console.log("\nPOP METHOD DELETES LAST ARRAY ITEM\n", fruitsArr);
 //      - "grapes" which costs 3.24
 //      - "mango" which costs 2.20
 
+let fruitsDict = {};
+fruitsDict["apple🍎"] = 0.5;
+fruitsDict["pear🍐"] = 1.14;
+fruitsDict["orange🍊"] = 1.23;
+fruitsDict["grapes🍇"] = 3.24;
+fruitsDict["mango🥭"] = 2.2;
+
+// test dict data accss
+// console.log("\nFRUITS DICT KEYS\n", Object.keys(fruitsDict));
+// console.log("\nFRUITS DICT VALUES\n", Object.values(fruitsDict));
+// console.log("\nFRUITS DICT KEY-VALUE PAIRS\n", Object.entries(fruitsDict));
+console.log("PRINT ALL PROPS", Object.getOwnPropertyNames(fruitsDict));
+console.log(
+  "PRINT EMPTY [] WHICH RETURNS BUILT-IN LENGTH METHOD",
+  Object.getOwnPropertyNames([])
+);
+console.log(
+  "PRINT NUM OF OBJ KEY-VALUE PAIRS",
+  Object.entries(fruitsDict).length
+);
+console.log("\n");
+
 // READ
 // - Iterate over the dictionary with a for loop and print each key (fruit name)
+for (let fruit in fruitsDict) {
+  //   console.log(fruitsDict.length); // returns undefined
+  console.log("PRINT KEY: ", fruit);
+}
+console.log("\n");
+
+let fruitNames = Object.entries(fruitsDict);
+for (let i = 0; i < Object.entries(fruitsDict).length; i++) {
+  console.log("PRINT FRUIT NAMES ONE AT A TIME", fruitNames[i][0]);
+}
+console.log("\n");
+console.log("PRINT KEY USING OBJ ENTRIES FOR FRUIT NAMES: ", fruitNames);
+console.log("\n");
+
 // - Iterate over the dictionary with a for loop and print each value (cost)
+for (let fruit in fruitsDict) {
+  let price = fruitsDict[fruit];
+  console.log("PRINT PRICE: ", price);
+}
+console.log("\n");
+
 // - Iterate over the dictionary with a for loop and print each key (fruit name) and value (cost)
+for (let fruit in fruitsDict) {
+  let value = fruitsDict[fruit];
+  console.log("fruit:", fruit + " costs: ", value);
+}
+console.log("\n");
 
 // UPDATE
 // - Add a new key and value to the fruits dictionary, where "kiwi" is the key
 //   and 5.13 is the value.
+fruitsDict["kiwi🥝"] = 5.13;
+console.log("UPDATED TO INCLUDE KIWI", fruitsDict);
+console.log("\n");
 
 // DELETE
 // - Print the dictionary first. Then, delete the key for "kiwi" that you added
 //   in the previous step. Then, print the dictionary again. Is the key for
 //   "kiwi" and its value of 5.13 gone? Did we delete it successfully?
+console.log("KIWI PRICE ONLY", fruitsDict["kiwi🥝"]);
+delete fruitsDict["kiwi🥝"];
+console.log("KIWI SHOULD NOW BE UNDEFINED", fruitsDict["kiwi🥝"]);
+console.log("DELETED KIWI MEANS NO KIWI ON LIST", fruitsDict);
+console.log("\n");
 
 // --------------------------------------------------------------------------
 // PROBLEM SET 3: ITERATING OVER THE FRUITS DICTIONARY
