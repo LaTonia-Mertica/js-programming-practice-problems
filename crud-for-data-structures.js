@@ -124,13 +124,28 @@ console.log("\n");
 console.log("KIWI PRICE ONLY", fruitsDict["kiwi🥝"]);
 delete fruitsDict["kiwi🥝"];
 console.log("KIWI SHOULD NOW BE UNDEFINED", fruitsDict["kiwi🥝"]);
-console.log("DELETED KIWI MEANS NO KIWI ON LIST", fruitsDict);
+console.log("UNDEFINED KIWI MEANS NO KIWI ON LIST", fruitsDict);
 console.log("\n");
 
 // --------------------------------------------------------------------------
 // PROBLEM SET 3: ITERATING OVER THE FRUITS DICTIONARY
 // Using the fruitsDict from the previous problem, can you tell me the total
 // cost of all fruits in the dictionary?
+let fruitCostSum = 0;
+for (let fruit in fruitsDict) {
+  //   cost = fruitsDict[fruit];
+  fruitCostSum += fruitsDict[fruit];
+}
+console.log("TOTAL COST OF FRUIT: $" + fruitCostSum);
+console.log("\n");
+
+let totalCost = 0;
+let fruitEntries = Object.entries(fruitsDict);
+for (let i = 0; i < fruitEntries.length; i++) {
+  totalCost += fruitEntries[i][1];
+}
+console.log("TOTAL COST USING OBJ ENTRIES & FOR LOOP", totalCost);
+console.log("\n");
 
 // --------------------------------------------------------------------------
 // PROBLEM SET 4: CHECKING FOR ITEMS IN YOUR FRUITS DICTIONARY
@@ -140,12 +155,70 @@ console.log("\n");
 // Using the array they sent and your fruitsDict, can you calculate the total
 // cost of the fruits that they want to buy?
 
+let order = ["mango🥭", "orange🍊"];
+
+let calculateFruitCost = function (order) {
+  let fruitCost = 0;
+  for (let i = 0; i < order.length; i++) {
+    let orderPrice = fruitsDict[order[i]];
+    fruitCost += orderPrice;
+  }
+  return fruitCost;
+};
+console.log(
+  "ORDER PASSED IN CONSOLE LOG AS ARRAY\n" +
+    "$" +
+    calculateFruitCost(["mango🥭", "orange🍊"])
+);
+console.log(
+  "ORDER COST FROM ORDER VARIABLE PASSED IN FN CALL AS ARGUMENT\n" +
+    "$" +
+    calculateFruitCost(order)
+);
+console.log("\n");
+
 // A customer sends a message to your online fruit store. They send an array of
 // fruits that they want to buy:
 //      order = ["mango", "strawberry"]
 // But oh no! Some of the fruits in their order are not in your fruitsDict. Can
 // you find the fruits that are unavailable (not in your fruits dict) and let
 // the customer know which ones they are?
+let nextOrder = [
+  "cherry🍒",
+  "mango🥭",
+  "strawberry🍓",
+  "blueberry🫐",
+  "coconut🥥",
+];
+
+let unavailableFruit = "";
+let unavailableFruitArr = [];
+
+let fruitInStock = "";
+let fruitInStockArr = [];
+
+for (let i = 0; i < nextOrder.length; i++) {
+  if (Object.keys(fruitsDict).includes(nextOrder[i])) {
+    fruitInStock = nextOrder[i].toUpperCase();
+    fruitInStockArr.push(fruitInStock);
+  }
+
+  if (Object.keys(fruitsDict).includes(nextOrder[i])) {
+    continue;
+  } else if (nextOrder[i] !== Object.keys(fruitsDict)) {
+    unavailableFruit = nextOrder[i].toUpperCase();
+    unavailableFruitArr.push(unavailableFruit);
+  }
+}
+console.log(
+  "FRUIT IN STOCK: " +
+    fruitInStockArr +
+    "\n" +
+    "UNAVAILABLE FRUIT: " +
+    unavailableFruitArr +
+    "\n"
+);
+console.log("\n");
 
 // Now, the customer has sent both the fruit names and the quantities that they
 // would like in the form of an order dictionary:
