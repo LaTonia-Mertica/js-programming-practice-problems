@@ -183,7 +183,7 @@ console.log("\n");
 // But oh no! Some of the fruits in their order are not in your fruitsDict. Can
 // you find the fruits that are unavailable (not in your fruits dict) and let
 // the customer know which ones they are?
-let nextOrder = [
+const nextOrder = [
   "grapes🍇",
   "pear🍐",
   "cherry🍒",
@@ -193,17 +193,17 @@ let nextOrder = [
   "coconut🥥",
 ];
 
-let unavailableFruitArr = [];
-let fruitInStockArr = [];
+const unavailableFruitArr = [];
+const fruitInStockArr = [];
 
 for (let i = 0; i < nextOrder.length; i++) {
   // line below re-written per line after line below
   //   if (Object.keys(fruitsDict).includes(nextOrder[i])) {
   if (includes(nextOrder[i], Object.keys(fruitsDict))) {
-    let fruitInStock = nextOrder[i].toUpperCase();
+    const fruitInStock = nextOrder[i].toUpperCase();
     fruitInStockArr.push(fruitInStock);
   } else {
-    let unavailableFruit = nextOrder[i].toUpperCase();
+    const unavailableFruit = nextOrder[i].toUpperCase();
     unavailableFruitArr.push(unavailableFruit);
   }
 }
@@ -237,20 +237,24 @@ function includes(item, itemsArray) {
 // In the orderDict, they are telling you they want 2 mangoes and 5 oranges.
 // Using the dictionary they sent and your fruitsDict, can you calculate the total
 // cost of the fruits that they want to buy?
-let orderDict = {
-  //   mango: 2,
-  //   orange: 5,
-  apple: 4,
+const orderDict = {
+  "mango🥭": 2,
+  "orange🍊": 5,
 };
 
-let fruitPrice = 0;
 let totalOrderCost = 0;
 
-for (let stockFruit in fruitsDict) {
-  fruitPrice = fruitsDict[stockFruit];
-  for (let orderFruit in orderDict) {
-    totalOrderCost = orderDict[orderFruit] * fruitPrice;
-  }
+for (let orderFruit in orderDict) {
+  const fruitPrice = fruitsDict[orderFruit];
+  const fruitQuantity = orderDict[orderFruit];
+  totalOrderCost += fruitPrice * fruitQuantity;
 }
+
 // EXPECTED OUTPUT 10.55
-console.log("FRUIT ORDER TOTAL COST\n" + "$" + totalOrderCost);
+console.log("FRUIT ORDER TOTAL COST\n" + "$" + totalOrderCost + "\n");
+
+// arrays and dicts are mutable
+// even with const declarations
+// their values/properties can be updated
+// orderDict["mango🥭"] = 10;
+// console.log(orderDict);
