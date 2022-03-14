@@ -156,3 +156,49 @@ console.log(
 QUESTION 5 OF 5        
 - What is the distribution of ratings? (How many are PG, PG-13, R, etc.?) 
  */
+
+// loop/iterate through each rating
+// track/store each different rating
+// incerement each rating individually
+// console.log
+
+const getRatingDistribution = {};
+const ratingsArr = ["PG-13", "NA", "PG", "G", "R"];
+
+for (let row of topMoviesArr) {
+  let element = row.split(",");
+  let rating = element[6];
+
+  if (!ratingsArr.includes(rating)) {
+    continue;
+  } else if (getRatingDistribution[rating] === undefined) {
+    getRatingDistribution[rating] = 1;
+  } else {
+    getRatingDistribution[rating]++;
+  }
+
+  // if (
+  //   !(
+  //     rating === "PG-13" ||
+  //     rating === "NA" ||
+  //     rating === "PG" ||
+  //     rating === "G" ||
+  //     rating === "R"
+  //   )
+  // ) {
+  //   continue;
+  // } else if (getRatingDistribution[rating] === undefined) {
+  //   getRatingDistribution[rating] = 1;
+  // } else {
+  //   getRatingDistribution[rating]++;
+  // }
+
+  // if (!isNaN(rating[0])) {
+  //   continue;
+  // } else if (getRatingDistribution[rating] === undefined) {
+  //   getRatingDistribution[rating] = 1;
+  // } else {
+  //   getRatingDistribution[rating]++;
+  // }
+}
+console.log("DISTRIBUTION OF RATINGS\n", getRatingDistribution, "\n");
