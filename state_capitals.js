@@ -82,12 +82,14 @@ for (const [key, value] of Object.entries(stateCapitals)) {
 }
 
 for (const key of Object.keys(stateCapitals)) {
+  // check whether key doesn't begin with specified letters
   if (
     !key.startsWith("A") &&
     !key.startsWith("I") &&
     !key.startsWith("O") &&
     !key.startsWith("U")
   ) {
+    // skip when doesn't
     continue;
   }
   let value = stateCapitals[key];
@@ -95,12 +97,14 @@ for (const key of Object.keys(stateCapitals)) {
 }
 
 for (const [key, value] of Object.entries(stateCapitals)) {
+  // check whether value doesn't begin with specified letters
   if (
     !value.startsWith("A") &&
     !value.startsWith("I") &&
     !value.startsWith("O") &&
     !value.startsWith("U")
   ) {
+    // skip when doesn't
     continue;
   }
   console.log("VOWEL START CAPITAL: ", value + ", IN STATE: ", key);

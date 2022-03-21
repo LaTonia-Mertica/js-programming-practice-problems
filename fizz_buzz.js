@@ -26,6 +26,7 @@ NOTES
 */
 
 // FINAL PROGRAM CODED
+// PRIORITIZE DIVISIBLES BY 15 TO GET PROPER OUTPUT
 let num1 = 1;
 while (num1 <= 100) {
   if (num1 % 3 === 0 && num1 % 5 === 0) {

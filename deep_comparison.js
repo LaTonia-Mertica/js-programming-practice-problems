@@ -23,6 +23,7 @@ function deepEqual(a, b) {
   if (a == null || typeof a != "object" || b == null || typeof b != "object")
     return false;
 
+  // can use object to get keys, values, or both (entries)
   let keysA = Object.keys(a),
     keysB = Object.keys(b);
   if (keysA.length != keysB.length) return false;

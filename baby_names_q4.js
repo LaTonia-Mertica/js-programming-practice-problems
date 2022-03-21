@@ -18,6 +18,7 @@ const fs = require("fs");
 const names2020Str = fs
   .readFileSync("baby_names_2020_short.txt")
   .toString("utf-8");
+// make all names uppercase to avoid issue with case
 const names2020Arr = names2020Str.toUpperCase().split("\n");
 
 const names1880Str = fs
@@ -26,13 +27,18 @@ const names1880Str = fs
 const names1880Arr = names1880Str.toUpperCase().split("\n");
 
 const namesThatMatch = () => {
+  // set tracker
   let namesInBothYears = [];
 
+  // nested for loop to iterate names from both years
+  // inner loop completes a cycle before out loop runs
   for (let names2020 of names2020Arr) {
     for (let names1880 of names1880Arr) {
       // names 2020 is equal to Liam
       // names 1880 is equal to liam
+      // when name in one year also in other year
       if (names2020 === names1880) {
+        // add that name to tracker
         namesInBothYears.push(names2020);
       }
     }

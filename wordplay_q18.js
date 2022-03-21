@@ -1,3 +1,4 @@
+// to read text file with data to manipulate
 const fs = require("fs");
 const words = fs.readFileSync("sowpods.txt").toString("UTF-8");
 const wordsByLine = words.split("\n");
@@ -34,8 +35,10 @@ const readlines = () => {
     "Z",
   ];
 
+  // to store words
   let repeat_letter_words = [];
 
+  // nested for loops to iterate characters/letters and words
   for (const words of wordsByLine) {
     let number_double_letters = 0;
     for (const letter of alphabet) {

@@ -1,3 +1,4 @@
+// to read text file with data to manipulate
 const fs = require("fs");
 const words = fs.readFileSync("sowpods.txt").toString("UTF-8");
 const wordsByLine = words.split("\n");
@@ -36,6 +37,9 @@ const readlines = () => {
 
   let lettersThatDontHaveWordsThatDoubleThem = [];
 
+  // nested for loops to iterate words and characters/letters
+  // seeking words with double letter next to each other
+  // to then exclude those letters
   for (const letter of alphabet) {
     let doubleLetterWordExists = false;
     for (const words of allWords) {

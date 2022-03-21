@@ -9,6 +9,11 @@
 // QUESTION: WHAT IS HAPPENING IN THIS CODE WITH NUM EQUIVALENTS TO 1 AND 2? ANSWER: Those sections of code are accounting for omission of a single letter s per the number of bottles ... Code runs on else condition except for when number equals 1 or 2
 var num = 99;
 // console.log(num === 1);
+
+// as long as num variable has value over 1
+// makes sense because this is counting down
+// log each message respectively to account
+// for single bottles at certain times in count down
 while (num >= 1) {
   if (num === 1) {
     console.log(
