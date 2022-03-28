@@ -22,6 +22,8 @@
 
 ###### _basic setup example w/for-of loop using empty array_
 
+###### [practice problems video walk through](https://www.youtube.com/channel/UCD67khlF1sOI9Z1YJY7nlTg)
+
 ###### [original source re: basic setup](https://stackoverflow.com/questions/34857458/reading-local-text-file-into-a-javascript-array)
 
 ###### [split method specific info/insight](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split)<br><br>
