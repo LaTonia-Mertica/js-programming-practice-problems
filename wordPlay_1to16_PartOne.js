@@ -334,7 +334,8 @@ if (palindromesThatDoNotContainVowels.length === 0) {
 console.log({ palindromesThatDoNotContainVowels });
 
 // let allPalindromes = [];
-let palindromesThatOnlyContainVowels = [];
+// let palindromesThatOnlyContainVowelsArr = [];
+let palindromesThatOnlyContainVowelsDict = {};
 // const lettersUnwanted = [
 //   "B",
 //   "C",
@@ -362,33 +363,48 @@ let palindromesThatOnlyContainVowels = [];
 for (let i = 0; i < wordArray.length; i++) {
   const word = wordArray[i];
   const wordInReverse = word.split("").reverse().join("");
-  if (word === wordInReverse) {
-    if (
-      word.length < 3 &&
-      (word.includes("A") ||
-        word.includes("E") ||
-        word.includes("I") ||
-        word.includes("O") ||
-        word.includes("U"))
-      // (word.startsWith("A") || word.startsWith("E") || word.startsWith("O"))
-    ) {
-      palindromesThatOnlyContainVowels.push(word);
+  for (let j = 0; j < word.length; j++) {
+    const letter = word[j];
+    if (word === wordInReverse) {
+      if (
+        word.length < 3 &&
+        (word.includes("A") ||
+          word.includes("E") ||
+          word.includes("I") ||
+          word.includes("O") ||
+          word.includes("U"))
+        // (word.startsWith("A") || word.startsWith("E") || word.startsWith("O"))
+      ) {
+        palindromesThatOnlyContainVowelsDict[letter] = word;
+      }
     }
   }
 }
+console.log({ palindromesThatOnlyContainVowelsDict });
 
 let shortestOutputtedWord;
 let shortestOfEqualLength = [];
+let shortestOutputtedWordPlus3 = [];
 for (const word of wordArray) {
   if (!shortestOutputtedWord || word.length < shortestOutputtedWord.length) {
     shortestOutputtedWord = word;
   }
+}
+for (const word of wordArray) {
   if (word.length === shortestOutputtedWord.length) {
     shortestOfEqualLength.push(word);
   }
 }
+for (const word of wordArray) {
+  if (word.length === shortestOutputtedWord.length + 3) {
+    shortestOutputtedWordPlus3.push(word);
+  }
+}
+console.log({ shortestOutputtedWord });
 console.log({ shortestOfEqualLength });
+console.log({ shortestOutputtedWordPlus3 });
 
+const palindromesThatOnlyContainVowelsArray = [];
 for (const word of wordArray) {
   const revWord = word.split("").reverse().join("");
   if (word === revWord) {
@@ -400,38 +416,38 @@ for (const word of wordArray) {
     if (!shortestOutputtedWord || word.length < shortestOutputtedWord.length) {
       shortestOutputtedWord = word;
     }
+    if (
+      word.length === shortestOutputtedWord.length &&
+      !word.includes("B") &&
+      !word.includes("C") &&
+      !word.includes("D") &&
+      !word.includes("F") &&
+      !word.includes("G") &&
+      !word.includes("H") &&
+      !word.includes("J") &&
+      !word.includes("K") &&
+      !word.includes("L") &&
+      !word.includes("M") &&
+      !word.includes("N") &&
+      !word.includes("P") &&
+      !word.includes("Q") &&
+      !word.includes("R") &&
+      !word.includes("S") &&
+      !word.includes("T") &&
+      !word.includes("V") &&
+      !word.includes("W") &&
+      !word.includes("X") &&
+      !word.includes("Y") &&
+      !word.includes("Z")
+    ) {
+      palindromesThatOnlyContainVowelsArray.push(word);
+    }
   }
-  if (
-    word.length === shortestOutputtedWord.length &&
-    !word.includes("B") &&
-    !word.includes("C") &&
-    !word.includes("D") &&
-    !word.includes("F") &&
-    !word.includes("G") &&
-    !word.includes("H") &&
-    !word.includes("J") &&
-    !word.includes("K") &&
-    !word.includes("L") &&
-    !word.includes("M") &&
-    !word.includes("N") &&
-    !word.includes("P") &&
-    !word.includes("Q") &&
-    !word.includes("R") &&
-    !word.includes("S") &&
-    !word.includes("T") &&
-    !word.includes("V") &&
-    !word.includes("W") &&
-    !word.includes("X") &&
-    !word.includes("Y") &&
-    !word.includes("Z")
-  ) {
-    palindromesThatOnlyContainVowels.push(word);
+  if (palindromesThatOnlyContainVowelsArray.length === 0) {
+    console.log("PALINDROMES ONLY CONTAINING VOWELS DO NOT EXIST");
   }
 }
-if (palindromesThatOnlyContainVowels.length === 0) {
-  console.log("PALINDROMES ONLY CONTAINING VOWELS DO NOT EXIST");
-}
-console.log({ palindromesThatOnlyContainVowels });
+console.log({ palindromesThatOnlyContainVowelsArray });
 
 // test case
 // expected output is at least 3 all vowel palindromes
