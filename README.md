@@ -6,7 +6,11 @@
 
 ###### _[coding style primer by amy nguyen](https://amy.dev/?p=783)_
 
-###### _[technical interview prep courtesy jess](https://docs.google.com/document/d/1g9BkZOc2YSyYsa2q-qblXsXcvvU_xteuRt7IxTybAVU/edit)_<br><br>
+###### _[technical interview prep courtesy jess](https://docs.google.com/document/d/1g9BkZOc2YSyYsa2q-qblXsXcvvU_xteuRt7IxTybAVU/edit)_
+
+###### [software engineer journey courtesy felipe](softwareEngineerJourney.pdf)
+
+<br><br>
 
 - [epic practice problems list](https://paper.dropbox.com/doc/Programming-practice-problems-Qp6jAVBXAuDZWiz5x6r9J)
 - each problem in separate file
