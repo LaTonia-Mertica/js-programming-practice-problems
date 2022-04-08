@@ -1,4 +1,47 @@
 /*
+Write a function that takes a word, and returns a dictionary where the keys are the letters and the values are the count of the letter in the word.
+
+Ex: getLetterCounts("aardvark") --> { "a": 3, "d": 1, "r": 2, "k": 1, "v":1 }
+*/
+
+// const fs = require("fs");
+// const sowpodsStrings = fs.readFileSync("sowpods.txt").toString("utf-8");
+// const arraySowpodsWords = sowpodsStrings.split("\n");
+
+function getLetterCounts(str) {
+  const letterCountsDict = {};
+  for (let i = 0; i < str.length; i++) {
+    console.log({ i });
+    let key = str[i];
+    console.log({ key });
+
+    if (letterCountsDict[key] === undefined) {
+      letterCountsDict[key] = 1;
+      console.log({ letterCountsDict });
+    } else {
+      letterCountsDict[key] += 1;
+      console.log({ letterCountsDict });
+    }
+  }
+  return letterCountsDict;
+}
+console.log(getLetterCounts("LATONIAMERTICA"));
+
+/*
+TRACING
+str = aardvark
+i = 0
+key = a
+letterCountsDict = {}
+letterCountsDict = {a: 1}
+
+str = aardvark
+i = 1
+key = a
+letterCountsDict = {a: 2}
+*/
+
+/*
 Find all the words in sowpods.txt that contains the prefix "PRE" and the suffix "ATE"
 
 Now, take the code we're written and turn it into a function that takes two parameters called prefix and suffix, and returns an array of words that contain the prefix and suffix.
@@ -45,5 +88,5 @@ function getPrefixAndSuffix(prefix, suffix) {
 
   return getWordsPrefixAndSuffixObj;
 }
-console.log(getPrefixAndSuffix("PRE", "ATE"));
-console.log(getPrefixAndSuffix("ANTI", "TION"));
+// console.log(getPrefixAndSuffix("PRE", "ATE"));
+// console.log(getPrefixAndSuffix("ANTI", "TION"));
