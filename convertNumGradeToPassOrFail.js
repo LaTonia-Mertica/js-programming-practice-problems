@@ -6,8 +6,8 @@ Convert number grade to pass or fail
 
 - we should defend against grades outside the scope of typical 0-100
 
-note: function may only have one return statement,
-which is the reason had to change returns to console logs
+note: function may have more than one return statement, if coded
+correctly, for this challenge I chose to convert returns to console logs
 */
 
 function convertNumGradeToPassOrFail(grade) {
