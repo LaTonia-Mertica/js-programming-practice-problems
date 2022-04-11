@@ -7,7 +7,7 @@
 /*
 - access each team from all occurrences
 - grab the mvp for each team every time the team is accessed
-- output a collection of the mvps for each time for all time
+- output a collection of the mvps for each team for all time
 */
 
 const fs = require("fs");
@@ -17,10 +17,9 @@ const nbaFinalsStrings = fs
   .trim();
 const nbaFinalsArray = nbaFinalsStrings.split("\r\n");
 
-const teamDict = {};
-function getTeamMvpsForAllTime(teamName) {
-  const allMvpsEver = [];
-
+function getTeamMvpsForAllTime(teamname) {
+  const teamDict = {};
+  const teamMvpsOfAllTime = [];
   for (let i = 0; i < nbaFinalsArray.length; i++) {
     const element = nbaFinalsArray[i].split(",");
     const team = element[1];
@@ -29,10 +28,11 @@ function getTeamMvpsForAllTime(teamName) {
     if (team === "Winner" || mvp === "") {
       continue;
     } else if (team) {
-      teamName = team;
-      teamDict[teamName] = allMvpsEver.push(mvp);
+      teamname = team;
+      teamMvpsOfAllTime.push(mvp);
+      teamDict[teamname] = teamMvpsOfAllTime;
     }
   }
   return teamDict;
 }
-console.log(getTeamMvpsForAllTime(teamDict));
+console.log(getTeamMvpsForAllTime("New York Knicks"));
