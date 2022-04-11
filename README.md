@@ -10,7 +10,7 @@
 
 ###### [software engineer journey courtesy felipe](softwareEngineerJourney.pdf)
 
-<br><br>
+<br>
 
 - [epic practice problems list](https://paper.dropbox.com/doc/Programming-practice-problems-Qp6jAVBXAuDZWiz5x6r9J)
 - each problem in separate file
@@ -56,6 +56,8 @@ readlines();
 **RESOURCE LAB | LEARN SOMETHING**<br>
 
 ###### _doesn't hurt to peek into more resources when have time/energy_
+
+###### [- consider joining underdog devs community](udOnboardingSlides.pdf)
 
 ###### [- appreciable benefits of mentoring ...](https://www.guider-ai.com/blog/mentoring-benefits)
 
