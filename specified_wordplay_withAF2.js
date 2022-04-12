@@ -22,17 +22,17 @@ function getTeamMvpsForAllTime(teamname) {
   const teamMvpsOfAllTime = [];
   for (let i = 0; i < nbaFinalsArray.length; i++) {
     const element = nbaFinalsArray[i].split(",");
+    const year = element[0];
     const team = element[1];
     const mvp = element[4];
 
     if (team === "Winner" || mvp === "") {
       continue;
-    } else if (team) {
-      teamname = team;
-      teamMvpsOfAllTime.push(mvp);
-      teamDict[teamname] = teamMvpsOfAllTime;
+    } else if (team === teamname) {
+      teamMvpsOfAllTime.push(mvp + " ," + year);
+      teamDict[team] = teamMvpsOfAllTime;
     }
   }
   return teamDict;
 }
-console.log(getTeamMvpsForAllTime("New York Knicks"));
+console.log(getTeamMvpsForAllTime("Boston Celtics"));
