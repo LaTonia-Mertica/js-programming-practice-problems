@@ -9,6 +9,7 @@
 - grab the mvp for each team every time the team is accessed
 - output a collection of the mvps for each team for all time
 */
+const { performance, PerformanceObserver } = require("perf_hooks");
 
 const fs = require("fs");
 const nbaFinalsStrings = fs
@@ -35,4 +36,66 @@ function getTeamMvpsForAllTime(teamname) {
   }
   return teamDict;
 }
-console.log(getTeamMvpsForAllTime("Boston Celtics"));
+startTime = Date.now();
+console.log("Houston Rockets", getTeamMvpsForAllTime("Houston Rockets"));
+duration = Date.now() - startTime;
+console.log({ duration });
+
+function getTeamMvpsForAllTime(teamname) {
+  const teamDict = {};
+  for (let i = 0; i < nbaFinalsArray.length; i++) {
+    const element = nbaFinalsArray[i].split(",");
+    const year = element[0];
+    const team = element[1];
+    const teamKey = element[1].toUpperCase();
+    const mvp = element[4];
+
+    if (team === "Winner" || mvp === "") {
+      continue;
+    }
+    if (teamDict[teamKey] === undefined) {
+      teamDict[teamKey] = [];
+    }
+    teamDict[teamKey].push(mvp + ", " + year);
+  }
+  return teamDict[teamname.toUpperCase()];
+}
+
+startTime = Date.now();
+console.log("Los Angeles Lakers", getTeamMvpsForAllTime("Los Angeles Lakers"));
+duration = performance.now() - startTime;
+console.log({ duration });
+
+/*
+fn for load/populate dict
+fn to get data ... end up not needing a separate 
+function because can use existing dictionary
+*/
+
+function loadDict(nbaArray) {
+  const teamDict = {};
+  for (let i = 0; i < nbaArray.length; i++) {
+    const element = nbaArray[i].split(",");
+    const year = element[0];
+    const team = element[1];
+    const teamKey = element[1].toUpperCase();
+    const mvp = element[4];
+
+    if (team === "Winner" || mvp === "") {
+      continue;
+    }
+    if (teamDict[teamKey] === undefined) {
+      teamDict[teamKey] = [];
+    }
+    teamDict[teamKey].push(mvp + ", " + year);
+  }
+  return teamDict;
+}
+myDict = loadDict(nbaFinalsArray);
+// console.log(myDict["BOSTON CELTICS"]);
+
+startTime = performance.now();
+console.log("BOSTON CELTICS", myDict["BOSTON CELTICS"]);
+console.log("NEW YORK KNICKS", myDict["NEW YORK KNICKS"]);
+duration = performance.now() - startTime;
+console.log({ duration });
