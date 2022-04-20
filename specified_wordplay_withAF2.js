@@ -9,7 +9,8 @@
 - grab the mvp for each team every time the team is accessed
 - output a collection of the mvps for each team for all time
 */
-const { performance, PerformanceObserver } = require("perf_hooks");
+// const { performance, PerformanceObserver } = require("perf_hooks");
+const { performance } = require("perf_hooks");
 
 const fs = require("fs");
 const nbaFinalsStrings = fs
@@ -36,9 +37,10 @@ function getTeamMvpsForAllTime(teamname) {
   }
   return teamDict;
 }
-startTime = Date.now();
+// startTime = Date.now();
+startTime = performance.now();
 console.log("Houston Rockets", getTeamMvpsForAllTime("Houston Rockets"));
-duration = Date.now() - startTime;
+duration = performance.now() - startTime;
 console.log({ duration });
 
 function getTeamMvpsForAllTime(teamname) {
@@ -61,7 +63,8 @@ function getTeamMvpsForAllTime(teamname) {
   return teamDict[teamname.toUpperCase()];
 }
 
-startTime = Date.now();
+// startTime = Date.now();
+startTime = performance.now();
 console.log("Los Angeles Lakers", getTeamMvpsForAllTime("Los Angeles Lakers"));
 duration = performance.now() - startTime;
 console.log({ duration });
