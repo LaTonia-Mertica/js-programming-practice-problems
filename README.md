@@ -81,6 +81,8 @@ readlines();
 
 ###### [- level up your code/web dev portfolio](https://www.freecodecamp.org/news/level-up-developer-portfolio/)
 
+###### [- get into algorithms notes for professionals](AlgorithmsNotesForProfessionals.pdf)
+
 <br>
 <br>
 
