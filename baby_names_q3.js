@@ -43,12 +43,6 @@ const scrabbleWordsStr = fs
   .trim();
 const scrabbleWordsArr = scrabbleWordsStr.toUpperCase().split("\n");
 
-// dictionary to track/store words in dictionary
-const scrabbleWordsDict = {};
-for (let word of scrabbleWordsArr) {
-  scrabbleWordsDict[word] = "";
-}
-
 // simple test case to get reverse working
 // const stringEx = "Example";
 // console.log(stringEx.split("").reverse().join("").toUpperCase());
@@ -86,6 +80,12 @@ var end = new Date().getTime();
 console.log("ARRAY PROGRAM RUN TIME: ", end - start + " ms\n");
 
 // dictionary program
+// dictionary to track/store words in dictionary
+const scrabbleWordsDict = {};
+for (let word of scrabbleWordsArr) {
+  scrabbleWordsDict[word] = "";
+}
+
 let namesValidScrabbleWordsDictionary = [];
 let namesReverseReadDictionary = [];
 
