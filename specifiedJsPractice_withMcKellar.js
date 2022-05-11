@@ -13,7 +13,7 @@ for (let i = 0; i < wordArr.length; i++) {
     thStartAndEndWords.push(word);
   }
 }
-//console.log({ thStartAndEndWords });
+console.log({ thStartAndEndWords }, "\n");
 
 // What are all of the words that have only “U”s for vowels?
 
@@ -32,7 +32,7 @@ for (let i = 0; i < wordArr.length; i++) {
     uOnlyVowelWords.push(word);
   }
 }
-//console.log({ uOnlyVowelWords });
+console.log({ uOnlyVowelWords }, "\n");
 
 //What are all of the words that have only “E”s for vowels and are at least 15 letters long?
 
@@ -51,7 +51,7 @@ for (let i = 0; i < wordArr.length; i++) {
     eOnlyVowelAtLeast15LetterWords.push(word);
   }
 }
-//console.log({ eOnlyVowelAtLeast15LetterWords });
+console.log({ eOnlyVowelAtLeast15LetterWords }, "\n");
 
 // What are the shortest words that start with “PRO” and end in “ING”? Make sure your solution can handle ties.
 
@@ -80,8 +80,8 @@ for (let i = 0; i < wordArr.length; i++) {
 //   }
 // }
 
-// console.log({ shortestWords });
-// console.log({ proStartIngEndShortestWords });
+console.log({ shortestWords });
+console.log({ proStartIngEndShortestWords }, "\n");
 
 // What are the shortest words that start with “ANT” and end in “INE”? Make sure your solution can handle ties.
 
@@ -117,7 +117,7 @@ for (let i = 0; i < wordArr.length; i++) {
     }
   }
 }
-//console.log({ antStartIneEndWords });
+console.log({ antStartIneEndWords }, "\n");
 
 // What are the longest words that include letter C, end in “EIN”, and are not under 7 letters long? Make sure your solution can handle ties.
 let c6EinWords;
@@ -134,7 +134,7 @@ for (let i = 0; i < wordArr.length; i++) {
     }
   }
 }
-//console.log({ cLetterOver6LettersEinEndWords });
+console.log({ cLetterOver6LettersEinEndWords }, "\n");
 
 // What are the longest words that include letter F, end in “S”, and are not under 9 letters long? Make sure your solution can handle ties.
 
@@ -160,7 +160,7 @@ for (let i = 0; i < wordArr.length; i++) {
     }
   }
 }
-//console.log({ fLetterOver8LettersEndSArr });
+console.log({ fLetterOver8LettersEndSArr }, "\n");
 
 // What are the shortest words that contain uga? Make sure your solution can handle ties.
 let shortUgaWords;
@@ -180,7 +180,7 @@ for (let i = 0; i < wordArr.length; i++) {
     }
   }
 }
-//console.log({ shortUgaWordsArr });
+console.log({ shortUgaWordsArr }, "\n");
 
 // What are the shortest words that consist only of vowels? Make sure your solution can handle ties.
 let tinyVowelWords;
@@ -205,9 +205,9 @@ for (let i = 0; i < wordArr.length; i++) {
   }
 }
 if (tinyVowelWordsArr.length === 0) {
-  //console.log("\nNo Other All Vowels Words!");
+  console.log("\nNo Other All Vowels Words!");
 }
-//console.log({ tinyVowelWordsArr }, "\n");
+console.log({ tinyVowelWordsArr }, "\n");
 
 // What words are the shortest that contain abc in no specific order?
 let abcAnyOrderShortWords;
@@ -224,7 +224,7 @@ for (let i = 0; i < wordArr.length; i++) {
     }
   }
 }
-//console.log({ abcAnyOrderShortWordsArr });
+console.log({ abcAnyOrderShortWordsArr }, "\n");
 
 // use foreach to log words that are 13 letter long, do not include the letter e, and contain the letter p
 const forEach13LetterNoEYesPWords = [];
@@ -233,4 +233,4 @@ wordArr.forEach((words) => {
     forEach13LetterNoEYesPWords.push(words);
   }
 });
-console.log({ forEach13LetterNoEYesPWords });
+console.log({ forEach13LetterNoEYesPWords }, "\n");
