@@ -94,6 +94,7 @@ function getMoviesReleasedInEarliestYear() {
   let earliestYear;
   // variable for movie needed that is not assigned a value
   let earliestMovie;
+  let listOfEarliestMovies = [];
 
   // for of loop to access each row in the movie array
   for (const row of movieArray) {
@@ -111,6 +112,9 @@ function getMoviesReleasedInEarliestYear() {
       earliestYear = year;
       // and also re-assign the movie variable to the title from the split array
       earliestMovie = title;
+      listOfEarliestMovies = [title];
+    } else if (year === earliestYear) {
+      listOfEarliestMovies.push(title);
     }
   }
   // return needed output
@@ -120,7 +124,8 @@ function getMoviesReleasedInEarliestYear() {
     earliestYear +
     "\nMOVIE TITLE: " +
     earliestMovie +
-    "\n"
+    "\nLIST OF EARLIEST MOVIES: " +
+    listOfEarliestMovies
   );
 }
 // console log function to get outpur from return statement
@@ -152,7 +157,7 @@ const getDreamworksMovies = () => {
 };
 // console log function
 // get fancy in the console log as needed
-console.log("DREAMWORKS MOVIES: ", getDreamworksMovies());
+console.log("\nDREAMWORKS MOVIES: ", getDreamworksMovies());
 // console.log({ dreamworksMovies });
 // console.log(dreamworksMovies.length);
 
