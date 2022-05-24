@@ -31,6 +31,7 @@ for (let i = 0; i < countryArr.length; i++) {
   }
 }
 console.log({ vowelBeginEndCountries });
+
 /* What country names are > 50% vowels? */
 const vowelLetters = ["A", "E", "I", "O", "U", "Y"];
 const invalidChars = [" ", ".", "-", "'", "(", ")", "’"];
