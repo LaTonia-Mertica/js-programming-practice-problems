@@ -1,4 +1,3 @@
-const { countReset } = require("console");
 const fs = require("fs");
 const countryStr = fs
   .readFileSync("countries.txt")
