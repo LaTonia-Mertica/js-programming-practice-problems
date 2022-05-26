@@ -6,23 +6,22 @@ BABY NAMES
            names for 2020 (handle ties)? 
         [x] What are all of the names that were top 40 baby names  
            in both 1880 and 2020?
-
-           // coming back to last one in this set
-        [] Find baby names in 2020 that when spelled backwards are 
+       
+        [x] Find baby names in 2020 that when spelled backwards are 
            valid scrabble words.
-            [] Solve this two ways: 
-                [] with an array to hold the Scrabble words
-                [] with a dictionary/set to hold the Scrabble words
-                [] time both implementations
+            [x] Solve this two ways: 
+                [x] with an array to hold the Scrabble words
+                [x] with a dictionary/set to hold the Scrabble words
+                [x] time both implementations
 
 COUNTRIES
         [x] What countries have “United” in the name?
         [x] What countries both begin and end with a vowel? 
         [x] What is the shortest country name - and handle ties?
         [x] What country names contain another country name? 
-        // coming back to last two in this set
-        [] What country names are > 50% vowels?
-        [] What countries use only one vowel in their name (vowel 
+  
+        [x] What country names are > 50% vowels?
+        [x] What countries use only one vowel in their name (vowel 
            can be used multiple times)?
 
 MISCELLANEOUS
@@ -34,11 +33,11 @@ TOP MOVIES
            DreamWorks? 
         [x] What is the highest grossing movie from Universal  
            Pictures, domestically?
-           // coming back to last three in this set
-        [] What distributor has the most films on this list?
-        [] What is the earliest year on this list, and what were 
+         
+        [x] What distributor has the most films on this list?
+        [x] What is the earliest year on this list, and what were 
            the films from that year?
-        [] What is the distribution of ratings? (How many are PG, 
+        [x] What is the distribution of ratings? (How many are PG, 
            PG-13, R, etc.?) 
 
 WORDPLAY
@@ -641,3 +640,170 @@ for (let i = 0; i < alphabet.length; i++) {
   }
 }
 console.log({ nonConsecutivelyAppearingLettersInEnglishLanguage });
+
+// this question uses sowpods - the scrabble words list
+// const fs = require("fs");
+const scrabbleWordsStr = fs
+  .readFileSync("sowpods.txt")
+  .toString("utf-8")
+  .toUpperCase()
+  .trim();
+const scrabbleWordsArr = scrabbleWordsStr.split("\n");
+
+function getValidScrabbleWordsFromNamesSpelledBackwards() {
+  const validScrabbleWords = [];
+  const namesSpelledBackwards = [];
+  for (const name of name2020Array) {
+    for (const word of scrabbleWordsArr) {
+      if (name.split("").reverse().join("").toUpperCase() === word) {
+        namesSpelledBackwards.push(name);
+        validScrabbleWords.push(word);
+      }
+    }
+  }
+  return (
+    "\nTHE WORDS: " +
+    validScrabbleWords +
+    "\nFROM THE NAMES: " +
+    namesSpelledBackwards
+  );
+}
+const runTimer = new Date().getTime();
+console.log(getValidScrabbleWordsFromNamesSpelledBackwards());
+const stopRun = new Date().getTime();
+console.log(stopRun - runTimer + " MS FOR ARRAY TO RUN\n");
+
+function getScrabbleWordsFromReversedNames() {
+  const wordDict = {};
+  for (const word of scrabbleWordsArr) {
+    wordDict[word] = "";
+  }
+  const theWords = [];
+  const theNames = [];
+  for (const name of name2020Array) {
+    if (name.split("").reverse().join("").toUpperCase() in wordDict) {
+      theNames.push(name);
+      theWords.push(name.split("").reverse().join("").toUpperCase());
+    }
+  }
+  return "\nSCRABBLE WORDS: " + theWords + "\nFROM THE NAMES: " + theNames;
+}
+const startRun = new Date().getTime();
+console.log(getScrabbleWordsFromReversedNames());
+const timerEnd = new Date().getTime();
+console.log(timerEnd - startRun + " MS FOR DICT TO RUN\n");
+
+function getThoseMoreThan50PercentVowels() {
+  const vowelLetters = ["A", "E", "I", "O", "U", "Y"];
+  let vowelCount = 0;
+  const invalidChars = [" ", ".", "(", ")", "'", "-", "′"];
+  let invalidCharsCount = 0;
+  const thoseMoreThan50PercentVowels = [];
+  for (const country of countryArray) {
+    const usableCountryNameLength = country.length - invalidCharsCount;
+    for (const letter of country) {
+      if (vowelLetters.includes(letter)) {
+        vowelCount++;
+      } else if (invalidChars.includes(letter)) {
+        invalidCharsCount++;
+      }
+    }
+    if (vowelCount / usableCountryNameLength > 0.5) {
+      thoseMoreThan50PercentVowels.push(country);
+    }
+  }
+  return thoseMoreThan50PercentVowels;
+}
+console.log(getThoseMoreThan50PercentVowels());
+
+function getJustOneVowels() {
+  const moreThanOneVowels = [];
+  const justOneVowels = [];
+  const vowelsArray = ["A", "E", "I", "O", "U", "Y"];
+  for (const country of countryArray) {
+    if (
+      country.includes("A") ||
+      country.includes("E") ||
+      country.includes("I") ||
+      country.includes("O") ||
+      country.includes("U") ||
+      country.includes("Y")
+    ) {
+      moreThanOneVowels.push(country);
+    }
+    let hasOneVowel = true;
+    let firstVowel = undefined;
+    for (const letter of country) {
+      if (vowelsArray.includes(letter)) {
+        if (firstVowel === undefined) {
+          firstVowel = letter;
+        } else if (letter !== firstVowel) {
+          hasOneVowel = false;
+        }
+      }
+    }
+    if (hasOneVowel) {
+      justOneVowels.push(country);
+    }
+  }
+  return justOneVowels;
+}
+console.log(getJustOneVowels());
+
+const distObj = {};
+for (const row of movieArray) {
+  const element = row.split(",");
+  const distributor = element[1];
+  if (distObj[distributor] === undefined) {
+    distObj[distributor] = 1;
+  } else {
+    distObj[distributor]++;
+  }
+}
+let theDist = "";
+let theDistCount = 0;
+for (const key in distObj) {
+  if (typeof theDist === "string") {
+    theDist = key;
+  }
+  if (distObj[key] > theDistCount) {
+    theDistCount = distObj[key];
+    distWithMostFilms = theDist;
+  }
+}
+console.log({ distWithMostFilms });
+
+function getEarliestYearAndFilms() {
+  let earliestFilm;
+  let earliestYear;
+  let allEarliestFilms = [];
+  for (const row of movieArray) {
+    const element = row.split(",");
+    const title = element[0];
+    const year = parseInt(element[2]);
+    if (!earliestYear || year < earliestYear) {
+      earliestYear = year;
+      earliestFilm = title;
+      allEarliestFilms = [title];
+    } else if (year === earliestYear) {
+      allEarliestFilms.push(title);
+    }
+  }
+  return "IN " + earliestYear + " " + earliestFilm + " WAS RELEASED";
+}
+console.log(getEarliestYearAndFilms());
+
+const ratings = ["G", "PG", "PG-13", "NA", "R"];
+const ratingsDistributionObj = {};
+for (const row of movieArray) {
+  const element = row.split(",");
+  const rating = element[6];
+  if (!ratings.includes(rating)) {
+    continue;
+  } else if (ratingsDistributionObj[rating] === undefined) {
+    ratingsDistributionObj[rating] = 1;
+  } else {
+    ratingsDistributionObj[rating]++;
+  }
+}
+console.log({ ratingsDistributionObj });
