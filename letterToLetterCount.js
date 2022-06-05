@@ -35,7 +35,7 @@ function getLetterToLetterCount(word) {
   }
   return wordObj;
 }
-console.log(getLetterToLetterCount("apple"));
+// console.log(getLetterToLetterCount("apple"));
 
 /*
 THE GOAL IS TO:
@@ -43,8 +43,8 @@ THE GOAL IS TO:
 - in fn there must be enough random letters to create sought word  ... this requires a count of valid letters available to create the word
 - fn returns a boolean that states true or false that can make the word with available letters
 */
-const scrabbleLetters = getLetterToLetterCount("awepples");
-const validWord = getLetterToLetterCount("apples");
+// const scrabbleLetters = getLetterToLetterCount("awepples");
+// const validWord = getLetterToLetterCount("apples");
 function canWordBeCreated(scrabbleLetters, validWord) {
   let canCreateWord = true;
   for (const [key, value] of Object.entries(validWord)) {
@@ -55,17 +55,17 @@ function canWordBeCreated(scrabbleLetters, validWord) {
   }
   return canCreateWord;
 }
-console.log(canWordBeCreated(scrabbleLetters, validWord));
+// console.log(canWordBeCreated(scrabbleLetters, validWord));
 
 /*
 Write a function that takes a string availableLetters as an argument and returns an array of all of the words that can be made from only thoseletters. Letters can be re-used as many times as needed and can appear in any order. Not all of the letters in availableLetters have to be used. */
 const fs = require("fs");
-const wordStr = fs
+const wordArr = fs
   .readFileSync("sowpods.txt")
   .toString("utf-8")
   .toUpperCase()
-  .trim();
-const wordArr = wordStr.split("\n");
+  .trim()
+  .split("\n");
 
 function getPossibleWords(availableLetters) {
   const result = [];
@@ -81,7 +81,7 @@ function getPossibleWords(availableLetters) {
   }
   return result;
 }
-console.log(getPossibleWords("AAH"));
+// console.log(getPossibleWords("AAH"));
 
 /*
 NEW HELPER FN
@@ -124,26 +124,14 @@ const scores = {
   Z: 10,
 };
 
-function getWordScoreObj(arr) {
-  const scoreOutput = [];
-  let lettersPerWordObj = {};
-  let theScore = {};
+function getWordScore(word) {
+  let tallyPerWord = 0;
 
-  const wordToScoreObj = getPossibleWords(arr);
-
-  for (const word of wordToScoreObj) {
-    lettersPerWordObj = getLetterToLetterCount(word);
-    for (const [key, value] in Object.entries(scores)) {
-      if (Object.keys(lettersPerWordObj) in scores) {
-        if (scoreOutput[theScore] === undefined) {
-          scoreOutput[theScore] = scores[key];
-        } else {
-          scoreOutput[theScore] = scores[key]++;
-        }
-        scoreOutput.push((theScore[word] = scores[key[value]]));
-      }
+  for (const letter of word) {
+    if (letter in scores) {
+      tallyPerWord = tallyPerWord + scores[letter];
     }
   }
-  return scoreOutput;
+  return tallyPerWord;
 }
-console.log(getWordScoreObj("AAH"));
+console.log(getWordScore("SUPERCALIFABULOUSDELICIOUSAWESOMEDOCIOUS"));
