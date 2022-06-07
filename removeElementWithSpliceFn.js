@@ -1,8 +1,8 @@
 /*
 Create fn to remove item using splice
 
-note this method will not remove the item from the front (unshift)
-or from the back (shift) of the array
+note this method will not remove the item from the front (shift)
+or from the back (pop) of the array
 */
 function removeItemUsingSplice(arr, idx) {
   // removes item at index 2

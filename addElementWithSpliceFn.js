@@ -1,7 +1,7 @@
 /*
 Create fn to add an element using splice
 
-note that this will not add to the front (unshift) or back (shift)
+note that this will not add to the front (unshift) or back (push)
 and adds without replacing anything in the array
 */
 function addElementToArrayWithSplice(nums, idx, elem) {
