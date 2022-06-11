@@ -1,6 +1,6 @@
 /* Use a function to iterate wordArr once to determine if the word meets the criteria: longest word containing each letter in it no more than once 
 
-PSEUDOCODE
+PSEUDOCODE (INITIAL BEFORE CURRENT REFACTOR)
 - arrange file system
 - create fn
 
@@ -39,40 +39,36 @@ const wordArr = fs
   .split("\n");
 
 function getWordsWithSingleLetters(arr) {
-  const wordsWithSingleLetters = [];
-  let longestWordThatMeetsCriteria;
   let allWordsWithSingleLetters = [];
-  const singleLettersWordsObj = {};
 
   for (const word of arr) {
-    const letterPerWordCountObj = {};
+    const foundLetters = {};
+
     for (let j = 0; j < word.length; j++) {
       const letter = word[j];
-      if (letterPerWordCountObj[letter] === undefined) {
-        letterPerWordCountObj[letter] = 1;
-      } else {
-        letterPerWordCountObj[letter]++;
-      }
-      if (letterPerWordCountObj[letter] > 1) {
-        break;
-      } else if (j === word.length - 1) {
-        wordsWithSingleLetters.push(word);
-      }
-    }
-  }
 
-  for (word of wordsWithSingleLetters) {
-    if (
-      !longestWordThatMeetsCriteria ||
-      word.length > longestWordThatMeetsCriteria.length
-    ) {
-      longestWordThatMeetsCriteria = word;
-      allWordsWithSingleLetters = [word];
-    } else if (word.length === longestWordThatMeetsCriteria.length) {
-      allWordsWithSingleLetters.push(word);
+      if (!foundLetters[letter]) {
+        // bool per only need to know if letter is known in the object
+        foundLetters[letter] = true;
+      } else {
+        foundLetters[letter] = false;
+        break;
+      }
+      // the word is a valid option because it has no duplicate letters
+      if (j === word.length - 1) {
+        // access length of the word directly from within array
+        if (
+          allWordsWithSingleLetters.length === 0 ||
+          word.length > allWordsWithSingleLetters[0].length
+        ) {
+          allWordsWithSingleLetters = [word];
+          // stops reference to the old array to reference the newest array that has the longer word
+        } else if (word.length === allWordsWithSingleLetters[0].length) {
+          allWordsWithSingleLetters.push(word);
+        }
+      }
     }
   }
-  return (singleLettersWordsObj[longestWordThatMeetsCriteria] =
-    allWordsWithSingleLetters);
+  return allWordsWithSingleLetters;
 }
 console.log(getWordsWithSingleLetters(wordArr));
