@@ -43,7 +43,11 @@ for (let i = 0; i < wordsArray.length; i++) {
     const secondWord = word.slice(j + 1);
     if (wordsArray.includes(firstWord) && wordsArray.includes(secondWord)) {
       compoundWords.push(word);
+      break;
     }
   }
 }
+const timeStart = performance.now();
 console.log({ compoundWords });
+const timeStop = performance.now();
+console.log(timeStop - timeStart + " MS RUN TIME");
