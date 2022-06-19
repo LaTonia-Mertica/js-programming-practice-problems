@@ -12,6 +12,10 @@ Produce an object that:
     - has as the key(s) each word that contains other words 
     - has as the value(s) all words contained within that word
     ** do not include in the value array the original word 
+
+OUTPUT
+- this outputs each word in the main word
+- with the main word as the value
 */
 
 //const sample = ["PI", "NE", "APP", "LES", "APPLE", "PINE", "PINEAPPLES"];
