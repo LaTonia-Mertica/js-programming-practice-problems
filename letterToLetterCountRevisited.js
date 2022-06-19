@@ -1,5 +1,5 @@
 const fs = require("fs");
-const WordArr = fs
+const wordArr = fs
   .readFileSync("sowpods.txt")
   .toString("utf-8")
   .toUpperCase()
@@ -11,10 +11,13 @@ const WordArr = fs
   - input string
   - output is obj w/letter as key and value as its occurrence
   */
+// function getLetterCountOfWord(str) {
 function getLetterCountOfWord(str) {
   const letterCountObj = {};
 
-  for (const letter of str) {
+  // for (const letter of str) {
+  for (let i = 0; i < str.length; i++) {
+    const letter = str[i];
     if (!letterCountObj[letter]) {
       letterCountObj[letter] = 1;
     } else {
@@ -23,7 +26,7 @@ function getLetterCountOfWord(str) {
   }
   return letterCountObj;
 }
-console.log(getLetterCountOfWord("PAPLEZ"));
+// console.log(getLetterCountOfWord("BENANAS"));
 
 /*
 - fn to check if a certain word can be created from the available letters in the obj
@@ -36,8 +39,8 @@ console.log(getLetterCountOfWord("PAPLEZ"));
 
 - return true if can create the word from letters available
 */
-const scrabbleWordObj = getLetterCountOfWord("PAPLEZ");
-const validWordObj = getLetterCountOfWord("APPLE");
+const scrabbleWordObj = getLetterCountOfWord("SCRUNANASEBA");
+const validWordObj = getLetterCountOfWord("BANANA");
 
 function wordCanBeCreated(scrabbleWordObj, validWordObj) {
   for (const [key, value] of Object.entries(validWordObj)) {
