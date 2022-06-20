@@ -26,7 +26,7 @@ function getLetterCountOfWord(str) {
   }
   return letterCountObj;
 }
-// console.log(getLetterCountOfWord("BENANAS"));
+console.log(getLetterCountOfWord("BENANAS"));
 
 /*
 - fn to check if a certain word can be created from the available letters in the obj
