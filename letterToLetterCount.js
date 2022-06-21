@@ -35,7 +35,7 @@ function getLetterToLetterCount(word) {
   }
   return wordObj;
 }
-// console.log(getLetterToLetterCount("apple"));
+console.log(getLetterToLetterCount("apple"));
 
 /*
 THE GOAL IS TO:
@@ -81,7 +81,7 @@ function getPossibleWords(availableLetters) {
   }
   return result;
 }
-// console.log(getPossibleWords("AAH"));
+console.log(getPossibleWords("AAH"));
 
 /*
 NEW HELPER FN

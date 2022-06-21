@@ -1,11 +1,3 @@
-const fs = require("fs");
-const wordArr = fs
-  .readFileSync("sowpods.txt")
-  .toString("utf-8")
-  .toUpperCase()
-  .trim()
-  .split("\n");
-
 /*
   - fn to get count of letter by word
   - input string
@@ -15,9 +7,9 @@ const wordArr = fs
 function getLetterCountOfWord(str) {
   const letterCountObj = {};
 
-  // for (const letter of str) {
-  for (let i = 0; i < str.length; i++) {
-    const letter = str[i];
+  for (const letter of str) {
+    // for (let i = 0; i < str.length; i++) {
+    //   const letter = str[i];
     if (!letterCountObj[letter]) {
       letterCountObj[letter] = 1;
     } else {
