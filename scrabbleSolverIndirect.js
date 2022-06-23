@@ -50,7 +50,7 @@ console.log(countOfLettersByWord("MAKSHEFISHJYESBT"));
 /*
 THE GOAL:
 - helper fn to get if inputted word can be made
-- input  of two objs
+- input of two objs
 - output bool re: whether word can be made
 */
 // fn
@@ -71,8 +71,9 @@ console.log(isValidWord(lettersObj, inputObj));
 /*
 THE GOAL:
 - fn
-- input two objs
-- return array of words from word list that can be made from available letters in input 
+- input a string
+- return array of created words
+- return word-to-score array 
 */
 
 const wordList = [
