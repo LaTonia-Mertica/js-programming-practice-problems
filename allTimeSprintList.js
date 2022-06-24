@@ -1,6 +1,5 @@
 // global
 const fs = require("fs");
-const { start } = require("repl");
 
 /*
 [x] What are all of the words containing UU?
@@ -323,8 +322,8 @@ console.log({ lettersNonConsecutive });
     [x] Can you change the code to make it easier to change out the letter from S to another letter?
     [x] What are all of the words that are 5 letters long and have a “T” in the last place?
     [x] What are all of the words that are 5 letters long and have an “L” in the third place and a “T” in the last place?
-    [] What are all of the words that are 5 letters long and have a “B” in the first place, an “L” in the third place, and a “T” in the last place?
-    [] Imagine the previous question, but for even more rules, like ten different letters are required. How could you make it easier to use?
+    [x] What are all of the words that are 4 letters or less long and have a “B” in the first place, an “L” in the third place, and a “T” in the last place?
+    [x] Imagine the previous question, but for even more rules, like ten different letters are required. How could you make it easier to use?
         - “I’m looking for all words that have O in the second place and Y in the last place”
         - “L in third place, T in fourth place, S in fifth place, …” */
 const wordsArray = fs
@@ -430,40 +429,318 @@ wordsArray.forEach((word) => {
 });
 console.log({ words5LettersWithLThirdPlaceAndTLastPlace });
 
-const words5LettersWithBFirstPlaceLThirdPlaceAndTLastPlace = [];
-wordsArray.forEach((word) => {
-  const firstPlace = word.charAt(0) === "B";
-  const thirdPlace = word.charAt(2) === "L";
-  const lastPlace = word[word.length - 1] === "T";
-  const lenOfWord = word.length === 5;
-
-  if (lenOfWord && firstPlace && thirdPlace && lastPlace) {
-    words5LettersWithBFirstPlaceLThirdPlaceAndTLastPlace.push(word);
+const wordsUnder5LettersSpecifiedLetterIndices = [];
+for (const word of wordsArray) {
+  if (
+    word.length <= 4 &&
+    word.startsWith("B") &&
+    word.charAt(2) === "L" &&
+    word.endsWith("T")
+  ) {
+    wordsUnder5LettersSpecifiedLetterIndices.push(word);
   }
-});
-console.log({ words5LettersWithBFirstPlaceLThirdPlaceAndTLastPlace });
+}
+console.log({ wordsUnder5LettersSpecifiedLetterIndices });
 
+const wordsPerDynamicIndices = [];
+// const words = ["BELT", "BOLT", "BILT"];
+
+for (let i = 0; i < wordsArray.length; i++) {
+  const word = wordsArray[i];
+  let isValidWord = true;
+
+  const specifiedEle = ["B", "L", "T"];
+  const lastIdx = word.length - 1;
+  const specifiedIdx = [0, 2, lastIdx];
+
+  for (let j = 0; j < specifiedEle.length; j++) {
+    const eleNeed = specifiedEle[j];
+    const eleInWord = word[specifiedIdx[j]];
+
+    if (eleNeed !== eleInWord) {
+      isValidWord = false;
+      break;
+    }
+  }
+
+  if (isValidWord) {
+    wordsPerDynamicIndices.push(word);
+  }
+}
+console.log({ wordsPerDynamicIndices });
 // 3-MINUTE WRIST BREAK
 
 /*
-[] What are all of the countries that have “United” in the name?
-[] What countries both begin and end with a vowel?
-[] What country names are > 50% vowels?
-[] What is the shortest country name? Make sure your solution can handle ties.
-[] What countries use only one vowel in their name (the vowel can be used multiple times)
+[x] What are all of the countries that have “United” in the name?
+[x] What countries both begin and end with a vowel?
+[x] What country names are > 50% vowels?
+[x] What is the shortest country name? Make sure your solution can handle ties.
+[x] What countries use only one vowel in their name (the vowel can be used multiple times)
     - For example, if the word “BEEKEEPER” were a country, it would be an answer, because it only uses “E”.
-[] There is at least one country name that contains another country name. Find all of these cases.
-[] What is the shortest baby name in the top 40 baby names for 2020?
-[] What are the longest baby names in the top 40 baby names for 2020? Make sure you can handle if there’s a tie.
+[x] There is at least one country name that contains another country name. Find all of these cases. */
+const countriesArr = fs
+  .readFileSync("countries.txt")
+  .toString("utf-8")
+  .toUpperCase()
+  .trim()
+  .split("\n");
+// console.log({ countriesArr });
 
-3-MINUTE WRIST BREAK
+const countriesUnited = [];
+countriesArr.forEach((country) => {
+  if (country.match("UNITED")) {
+    countriesUnited.push(country);
+  }
+});
+console.log({ countriesUnited });
 
-[] There is at least one baby name from the top 40 baby names for 2020 that, when spelled backwards, is a valid Scrabble word. Find and print all such names.
-    [] Solve this two ways: first with an array to hold the Scrabble words, and then with a dictionary (or set) to hold the Scrabble words. Use timer functions to measure how long it takes to complete this work under each implementation. Why is the time different?
-[] What are all of the names that were top 40 baby names in both 1880 and 2020?
+const countriesVowelStartAndEnd = [];
+const vowels = ["A", "E", "I", "O", "U"];
 
-3-MINUTE WRIST BREAK
+countriesArr.forEach((country) => {
+  const firstIdx = country.charAt(0);
+  const lastIdx = country.slice(-1);
 
+  if (vowels.includes(firstIdx) && vowels.includes(lastIdx)) {
+    countriesVowelStartAndEnd.push(country);
+  }
+});
+console.log({ countriesVowelStartAndEnd });
+
+const countriesVowelStartAndEndIncludingY = [];
+const vowelList = ["A", "E", "I", "O", "U"];
+
+countriesArr.forEach((country) => {
+  const firstIdx = country.charAt(0);
+  const lastIdx = country.slice(-1);
+
+  if (vowelList.includes(firstIdx) && vowelList.includes(lastIdx)) {
+    countriesVowelStartAndEndIncludingY.push(country);
+  }
+});
+
+const wordsYVowelStartAndEnd = [];
+for (const country of countriesVowelStartAndEndIncludingY) {
+  if (country.startsWith("Y") && country.endsWith("Y")) {
+    wordsYVowelStartAndEnd.push(country);
+  }
+}
+if (!wordsYVowelStartAndEnd.length) {
+  console.log("NO COUNTRIES START AND END WITH LETTER Y!");
+}
+console.log({ countriesVowelStartAndEndIncludingY });
+
+const countries50PercentVowels = [];
+const vowelArr = ["A", "E", "I", "O", "U", "Y"];
+const invalidChars = [" ", ".", "'", "-", "(", ")", "′"];
+
+countriesArr.forEach((country) => {
+  let vowelCount = 0;
+  let invalidCharCount = 0;
+  const trueLength = country.length - invalidCharCount;
+
+  for (const letter of country) {
+    if (vowelArr.includes(letter)) {
+      vowelCount++;
+    } else if (invalidChars.includes(letter)) {
+      invalidCharCount++;
+    }
+  }
+
+  if (vowelCount / trueLength > 0.5) {
+    countries50PercentVowels.push(country);
+  }
+});
+console.log({ countries50PercentVowels });
+
+let countryNameShortest;
+let countryNameShortestTies = [];
+
+countriesArr.forEach((country) => {
+  if (!countryNameShortest || country.length < countryNameShortest.length) {
+    countryNameShortest = country;
+    countryNameShortestTies = [country];
+  } else if (country.length === countryNameShortest.length) {
+    countryNameShortestTies.push(country);
+  }
+});
+console.log({ countryNameShortest }, { countryNameShortestTies });
+
+const countriesWithSingleVowels = [];
+const countriesWithAnyVowels = [];
+const vList = ["A", "E", "I", "O", "U", "Y"];
+
+countriesArr.forEach((country) => {
+  const cLetters = country.split("");
+
+  let hasOneVowel = true;
+  let firstVowel = null;
+
+  cLetters.forEach((letter) => {
+    if (
+      country.includes("A") ||
+      country.includes("E") ||
+      country.includes("I") ||
+      country.includes("O") ||
+      country.includes("U") ||
+      country.includes("Y")
+    ) {
+      countriesWithAnyVowels.push(country);
+    }
+
+    if (vList.includes(letter)) {
+      if (!firstVowel) {
+        firstVowel = letter;
+      } else {
+        if (firstVowel !== letter) {
+          hasOneVowel = false;
+        }
+      }
+    }
+  });
+
+  if (hasOneVowel) {
+    countriesWithSingleVowels.push(country);
+  }
+});
+console.log({ countriesWithAnyVowels });
+console.log({ countriesWithSingleVowels });
+
+const countryNameInCountryName = [];
+const countryNameWithCountryNameInIt = [];
+
+countriesArr.forEach((country1) => {
+  countriesArr.forEach((country2) => {
+    if (country1 !== country2 && country1.includes(country2)) {
+      countryNameWithCountryNameInIt.push(country1);
+      countryNameInCountryName.push(country2);
+    }
+  });
+});
+console.log({ countryNameInCountryName }, { countryNameWithCountryNameInIt });
+// 3-MINUTE WRIST BREAK
+
+/*
+[x] What is the shortest baby name in the top 40 baby names for 2020?
+[x] What are the longest baby names in the top 40 baby names for 2020? Make sure you can handle if there’s a tie.
+[x] What are all of the names that were top 40 baby names in both 1880 and 2020?
+There is at least one baby name from the top 40 baby names for 2020 that, when spelled backwards, is a valid Scrabble word. Find and print all such names.
+    - Solve this two ways: 
+    [x] first with an array to hold the Scrabble words, and then 
+    [x] with a dictionary (or set) to hold the Scrabble words. 
+    [x] Use timer functions to measure how long it takes to complete this work under each implementation. Why is the time different? ... Arrays iterate the entire data set ... Objects go directly to key/value sought, and as such are faster.
+ */
+const babyNames2020Arr = fs
+  .readFileSync("baby_names_2020_short.txt")
+  .toString("utf-8")
+  .toUpperCase()
+  .trim()
+  .split("\n");
+// console.log({ babyNames2020Arr });
+
+const babyNames1880Arr = fs
+  .readFileSync("baby_names_1880_short.txt")
+  .toString("utf-8")
+  .toUpperCase()
+  .trim()
+  .split("\n");
+// console.log({ babyNames1880Arr });
+
+const scrabbleWordsList = fs
+  .readFileSync("sowpods.txt")
+  .toString("utf-8")
+  .toUpperCase()
+  .trim()
+  .split("\n");
+// console.log({ scrabbleWordsList });
+
+let babyNameShortest;
+let babyNameShortestTies = [];
+
+babyNames2020Arr.forEach((name2020) => {
+  if (!babyNameShortest || name2020.length < babyNameShortest.length) {
+    babyNameShortest = name2020;
+    babyNameShortestTies = [name2020];
+  } else if (name2020.length === babyNameShortest.length) {
+    babyNameShortestTies.push(name2020);
+  }
+});
+
+if (babyNameShortestTies.length === 1) {
+  console.log("NO TIES TO SHORTEST BABY NAME!");
+}
+console.log({ babyNameShortest }, { babyNameShortestTies });
+
+let babyNameLongest;
+let babyNameLongestTies = [];
+
+babyNames2020Arr.forEach((name2020) => {
+  if (!babyNameLongest || name2020.length > babyNameLongest.length) {
+    babyNameLongest = name2020;
+    babyNameLongestTies = [name2020];
+  } else if (name2020.length === babyNameLongest.length) {
+    babyNameLongestTies.push(name2020);
+  }
+});
+console.log({ babyNameLongest }, { babyNameLongestTies });
+
+const babyNameInBothYears = [];
+
+babyNames2020Arr.forEach((name2020) => {
+  babyNames1880Arr.forEach((name1880) => {
+    if (name2020 === name1880) {
+      babyNameInBothYears.push(name1880 || name2020);
+    }
+  });
+});
+console.log({ babyNameInBothYears });
+
+const babyName2020BeforeSpelledBackwards = [];
+const babyName2020ThatIsScrabbleWordWhenSpelledBackwards = [];
+
+babyNames2020Arr.forEach((name2020) => {
+  const name2020SpelledBackwards = name2020.split("").reverse().join("");
+  scrabbleWordsList.forEach((word) => {
+    if (name2020SpelledBackwards === word) {
+      babyName2020BeforeSpelledBackwards.push(name2020);
+      babyName2020ThatIsScrabbleWordWhenSpelledBackwards.push(
+        name2020SpelledBackwards
+      );
+    }
+  });
+});
+const timeGo = performance.now();
+console.log(
+  { babyName2020BeforeSpelledBackwards },
+  { babyName2020ThatIsScrabbleWordWhenSpelledBackwards }
+);
+const timeEnd = performance.now();
+console.log(timeEnd - timeGo + " MS ARRAY RUN TIME");
+
+const babyName2020BeforeReversed = [];
+const babyName2020Reversed = [];
+const scrabbleWordsListObj = {};
+
+scrabbleWordsList.forEach((word) => {
+  if (!scrabbleWordsListObj[word]) {
+    scrabbleWordsListObj[word] = "🔤";
+  }
+});
+
+babyNames2020Arr.forEach((name2020) => {
+  const name2020Reversed = name2020.split("").reverse().join("");
+  if (name2020Reversed in scrabbleWordsListObj) {
+    babyName2020BeforeReversed.push(name2020);
+    babyName2020Reversed.push(name2020Reversed);
+  }
+});
+const goTime = performance.now();
+console.log({ babyName2020BeforeReversed }, { babyName2020Reversed });
+const endTime = performance.now();
+console.log(endTime - goTime + " MS OBJECT RUN TIME");
+// 3-MINUTE WRIST BREAK
+
+/*
 [] What are all of the words that both start with a “TH” and end with a “TH”?
 [] What are all of the words that have only “U”s for vowels?
 [] What are all of the words that have only “E”s for vowels and are at least 15 letters long?
