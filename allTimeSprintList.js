@@ -741,13 +741,149 @@ console.log(endTime - goTime + " MS OBJECT RUN TIME");
 // 3-MINUTE WRIST BREAK
 
 /*
-[] What are all of the words that both start with a “TH” and end with a “TH”?
-[] What are all of the words that have only “U”s for vowels?
-[] What are all of the words that have only “E”s for vowels and are at least 15 letters long?
-[] What are all of the words that start with “PRO”, end in “ING”, and are exactly 11 letters long?
-[] What are the shortest words that start with “PRO” and end in “ING”? Make sure your solution can handle ties.
+IMPLEMENT DYNAMIC SOLUTIONS
+[x] What are all of the words that both start with a “TH” and end with a “TH”?
+[x] What are all of the words that have only “U”s for vowels?
+[x] What are all of the words that have only “E”s for vowels and are at least 15 letters long?
+[x] What are all of the words that start with “PRO”, end in “ING”, and are exactly 11 letters long?
+[x] What are the shortest words that start with “PRO” and end in “ING”? Make sure your solution can handle ties. */
 
-3-MINUTE WRIST BREAK
+const listOfWordsInArray = fs
+  .readFileSync("sowpods.txt")
+  .toString("utf-8")
+  .toUpperCase()
+  .trim()
+  .split("\n");
+// console.log({ listOfWordsInArray });
+
+// non dynamic
+const wordsStartAndEndTh = [];
+for (const word of listOfWordsInArray) {
+  if (word.startsWith("TH")) {
+    if (word.endsWith("TH")) {
+      wordsStartAndEndTh.push(word);
+    }
+  }
+}
+console.log({ wordsStartAndEndTh });
+
+// dynamic
+const wordsStartAndEndThDynamic = [];
+for (const word of listOfWordsInArray) {
+  const theFix = "TH";
+  if (word.startsWith(theFix)) {
+    if (word.endsWith(theFix)) {
+      wordsStartAndEndThDynamic.push(word);
+    }
+  }
+}
+console.log({ wordsStartAndEndThDynamic });
+
+// non dynamic
+const wordsNoVowelButU = [];
+for (const word of listOfWordsInArray) {
+  if (
+    !word.includes("A") &&
+    !word.includes("E") &&
+    !word.includes("I") &&
+    !word.includes("O") &&
+    !word.includes("Y")
+  ) {
+    wordsNoVowelButU.push(word);
+  }
+}
+console.log({ wordsNoVowelButU });
+
+// dynamic
+const wordsNoVowelButUDynamic = [];
+
+const exclusions = ["A", "E", "I", "O", "Y"];
+const exclusionsObj = {};
+
+for (const e of exclusions) {
+  if (!exclusionsObj[e]) {
+    exclusionsObj[e] = "🔠";
+  }
+}
+
+for (const word of listOfWordsInArray) {
+  const wordObj = {};
+  for (const letter of word) {
+    if (!wordObj[letter]) {
+      wordObj[letter] = "🔠";
+    }
+  }
+
+  for (const key of Object.keys(wordObj)) {
+    if (key in exclusionsObj) {
+      continue;
+    } else {
+      wordsNoVowelButUDynamic.push(word);
+    }
+  }
+}
+console.log({ wordsNoVowelButUDynamic });
+
+// efficient
+const wordsNoVowelsButEAtLeast15Letters = [];
+listOfWordsInArray.forEach((word) => {
+  if (word.length >= 15) {
+    if (
+      !word.includes("A") &&
+      !word.includes("I") &&
+      !word.includes("O") &&
+      !word.includes("U") &&
+      !word.includes("Y")
+    ) {
+      wordsNoVowelsButEAtLeast15Letters.push(word);
+    }
+  }
+});
+console.log({ wordsNoVowelsButEAtLeast15Letters });
+
+// efficient
+const wordsSpecifiedPrefixAndSuffix = [];
+const pre = "PRO";
+const suf = "ING";
+
+listOfWordsInArray.forEach((word) => {
+  const lengthiness = word.length === 11;
+
+  if (lengthiness && word.startsWith(pre) && word.endsWith(suf)) {
+    wordsSpecifiedPrefixAndSuffix.push(word);
+  }
+});
+console.log({ wordsSpecifiedPrefixAndSuffix });
+
+// efficient
+let wordShortestWithSpecifiedPrefixAndSuffix;
+let wordShortestWithSpecifiedPrefixAndSuffixTies = [];
+
+const pref = "PRO";
+const suff = "ING";
+
+listOfWordsInArray.forEach((word) => {
+  if (word.startsWith(pref) && word.endsWith(suff)) {
+    if (
+      !wordShortestWithSpecifiedPrefixAndSuffix ||
+      word.length < wordShortestWithSpecifiedPrefixAndSuffix.length
+    ) {
+      wordShortestWithSpecifiedPrefixAndSuffix = word;
+      wordShortestWithSpecifiedPrefixAndSuffixTies = [word];
+    } else if (
+      word.length === wordShortestWithSpecifiedPrefixAndSuffix.length
+    ) {
+      wordShortestWithSpecifiedPrefixAndSuffixTies.push(word);
+    }
+  }
+});
+console.log(
+  { wordShortestWithSpecifiedPrefixAndSuffix },
+  { wordShortestWithSpecifiedPrefixAndSuffixTies }
+);
+// 3-MINUTE WRIST BREAK
+
+/*
 [] MadLib 
 Write a function that takes three strings - a verb, an adjective, and a noun - uppercases and interpolates them into the sentence "We shall VERB the ADJECTIVE NOUN". Use ES6 template literals.
 
