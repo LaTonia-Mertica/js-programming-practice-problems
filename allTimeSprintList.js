@@ -1037,22 +1037,200 @@ console.log(
   )
 );
 /*
-[] What are all of the words that can be made from only the letters in “RSTLNE”? Not all of those letters need to be used, and letters can be repeated.
-[] What is the longest word that can be made from only the letters in “RSTLNE”? Not all of those letters need to be used, and letters can be repeated. Make sure your solution can handle ties.
-[] What are all of the words that can be made without the letters in “AEIOSHRTN” (in other words, without the most common letters)? Not all of those letters need to be used, and letters can be repeated. 
-[] What is the longest word that can be made without the letters in “AEIOSHRTN” (in other words, without the most common letters)? Not all of those letters need to be used, and letters can be repeated. Make sure your solution can handle ties. 
+[x] What are all of the words that can be made from only the letters in “RSTLNE”? Not all of those letters need to be used, and letters can be repeated.
+[x] What is the longest word that can be made from only the letters in “RSTLNE”? Not all of those letters need to be used, and letters can be repeated. Make sure your solution can handle ties.
+[x] What are all of the words that can be made without the letters in “AEIOSHRTN” (in other words, without the most common letters)? Not all of those letters need to be used, and letters can be repeated. 
+[x] What is the longest word that can be made without the letters in “AEIOSHRTN” (in other words, without the most common letters)? Not all of those letters need to be used, and letters can be repeated. Make sure your solution can handle ties. */
+const wArr = fs
+  .readFileSync("sowpods.txt")
+  .toString()
+  .toUpperCase()
+  .trim()
+  .split("\n");
+// console.log({ wArr });
 
-3-MINUTE WRIST BREAK 
+const wordsRSTLNE = [];
+const allowableLetters = ["R", "S", "T", "L", "N", "E"];
 
-[] Write a function that takes a string `substring` as an argument and returns an array of all of the words that contain that substring (the substring can appear anywhere in the word).
-[] Write a function that takes a string `prefix` as an argument and returns an array of all of the words that start with that prefix (the prefix has to be at the beginning of the word).
-[] Write a function that takes a string `prefix` as the first argument, a string `suffix` as the second argument, and an integer `length` as the third argument. It should return an array of all of the words that start with that prefix, end with that suffix, and are that length.
-[] Write a function that takes a string `word` as an argument and returns a count of all of the “A”s in that string.
-[] Write a function that takes a string `word` as the first argument, a string `letter` as the second argument, and returns a count of how many times `letter` occurs in `word`.
-[] Write a function that takes a string `phrase` and returns a dictionary contains counts of how many times every character appears in `phrase`.
+for (const w of wArr) {
+  for (let i = 0; i < w.length; i++) {
+    if (!allowableLetters.includes(w[i])) {
+      break;
+    } else if (i === w.length - 1) {
+      wordsRSTLNE.push(w);
+    }
+  }
+}
+console.log({ wordsRSTLNE });
 
-3-MINUTE WRIST BREAK
+let wordRSTLNELongest;
+let wordRSTLNELongestTies = [];
+const allowedLetters = ["R", "S", "T", "L", "N", "E"];
 
+for (const w of wArr) {
+  for (let i = 0; i < w.length; i++) {
+    if (!allowedLetters.includes(w[i])) {
+      break;
+    }
+
+    if (i === w.length - 1) {
+      if (!wordRSTLNELongest || w.length > wordRSTLNELongest.length) {
+        wordRSTLNELongest = w;
+        wordRSTLNELongestTies = [w];
+      } else if (w.length === wordRSTLNELongest.length) {
+        wordRSTLNELongestTies.push(w);
+      }
+    }
+  }
+}
+
+if (wordRSTLNELongestTies.length <= 1) {
+  console.log("NO TIES FOR LONGEST WORD OF RSTLNE LETTERS!");
+}
+console.log({ wordRSTLNELongest }, { wordRSTLNELongestTies });
+
+const wordsNoAEIOSHRTN = [];
+const omitters = ["A", "E", "I", "O", "S", "H", "R", "T", "N"];
+
+for (const w of wArr) {
+  for (let i = 0; i < w.length; i++) {
+    if (omitters.includes(w[i])) {
+      break;
+    } else if (i === w.length - 1) {
+      wordsNoAEIOSHRTN.push(w);
+    }
+  }
+}
+console.log({ wordsNoAEIOSHRTN });
+
+let wordNoAEIOSHRTNLongest;
+let wordNoAEIOSHRTNLongestTies = [];
+const omitted = ["A", "E", "I", "O", "S", "H", "R", "T", "N"];
+
+for (const w of wArr) {
+  for (let i = 0; i < w.length; i++) {
+    if (omitted.includes(w[i])) {
+      break;
+    } else if (i === w.length - 1) {
+      if (!wordNoAEIOSHRTNLongest || wordNoAEIOSHRTNLongest.length < w.length) {
+        wordNoAEIOSHRTNLongest = w;
+        wordNoAEIOSHRTNLongestTies = [w];
+      } else if (w.length === wordNoAEIOSHRTNLongest.length) {
+      }
+    }
+  }
+}
+
+if (wordNoAEIOSHRTNLongestTies.length <= 1) {
+  console.log("NO TIES FOR LONGEST NO SPECIFIED LETTERS WORD!");
+}
+console.log({ wordNoAEIOSHRTNLongest }, { wordNoAEIOSHRTNLongestTies });
+// 3-MINUTE WRIST BREAK
+
+/*
+[X] Write a function that takes a string `substring` as an argument and returns an array of all of the words that contain that substring (the substring can appear anywhere in the word).
+[x] Write a function that takes a string `prefix` as an argument and returns an array of all of the words that start with that prefix (the prefix has to be at the beginning of the word).
+[x] Write a function that takes a string `prefix` as the first argument, a string `suffix` as the second argument, and an integer `length` as the third argument. It should return an array of all of the words that start with that prefix, end with that suffix, and are that length.
+[x] Write a function that takes a string `word` as an argument and returns a count of all of the “A”s in that string.
+[x] Write a function that takes a string `word` as the first argument, a string `letter` as the second argument, and returns a count of how many times `letter` occurs in `word`.
+[x] Write a function that takes a string `phrase` and returns a dictionary containing counts of how many times every character appears in `phrase`. */
+const wordList = fs
+  .readFileSync("sowpods.txt")
+  .toString("utf-8")
+  .toUpperCase()
+  .trim()
+  .split("\n");
+// console.log({ wordList });
+
+function getWordsWithSubstring(substring) {
+  const wordsWithSubstring = [];
+  for (const w of wordList) {
+    if (w.match(substring)) {
+      wordsWithSubstring.push(w);
+    }
+  }
+  return wordsWithSubstring;
+}
+console.log(getWordsWithSubstring("ILES"));
+
+function getWordsWithPrefix(prefix) {
+  const wordsPre = [];
+  for (const w of wordList) {
+    const wPre = w.startsWith(prefix);
+    if (wPre) {
+      wordsPre.push(w);
+    }
+  }
+  return wordsPre;
+}
+console.log(getWordsWithPrefix("UPT"));
+
+function getSpecifiedEles(prefix, suffix, length) {
+  const wordsSpecifiedEles = [];
+
+  for (const w of wordList) {
+    const start = w.startsWith(prefix);
+    const end = w.endsWith(suffix);
+    length = w.length === 9;
+
+    if (length) {
+      if (start && end) {
+        wordsSpecifiedEles.push(w);
+      }
+    }
+  }
+  return wordsSpecifiedEles;
+}
+console.log(getSpecifiedEles("AB", "AL", 9));
+
+function getWordCharCount(word) {
+  let lCharCount = 0;
+  let lChar;
+  let nonLCharCount = 0;
+  let nonLChar;
+  const wordCharCountObj = {};
+
+  for (const char of word) {
+    // if (char === "A") {
+    // accumulates
+    // if (char === "A" || char === "!") {
+    if (char === "A") {
+      lChar = char;
+      lCharCount++;
+    } else if (char === "!") {
+      nonLChar = char;
+      nonLCharCount++;
+    }
+    wordCharCountObj["char"] = [
+      [lChar, lCharCount],
+      [nonLChar, nonLCharCount],
+    ];
+  }
+  return wordCharCountObj["char"];
+}
+console.log(getWordCharCount("APPA!A!A!LELAC!IAUS!!!"));
+
+function getStringCharCount(phrase) {
+  const pArr = phrase.split("");
+
+  const stringCharCountObj = {};
+
+  for (const c of pArr) {
+    if (c !== " ") {
+      if (!stringCharCountObj[c]) {
+        stringCharCountObj[c] = 1;
+      } else {
+        stringCharCountObj[c]++;
+      }
+    }
+  }
+  return stringCharCountObj;
+}
+console.log(getStringCharCount("THIS IS A STRING PHRASE!"));
+
+// 3-MINUTE WRIST BREAK
+
+/*
 [] Write a function that takes as an argument a year and returns the winner of the NBA finals that year.
 [] Write a function that takes as an argument a team name and returns an array of all of the years the team has won the NBA finals.
 [] Which teams have made it to the NBA finals but have never won?
