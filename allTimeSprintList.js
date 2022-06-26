@@ -884,7 +884,7 @@ console.log(
 // 3-MINUTE WRIST BREAK
 
 /*
-[] MadLib 
+[x] MadLib 
 Write a function that takes three strings - a verb, an adjective, and a noun - uppercases and interpolates them into the sentence "We shall VERB the ADJECTIVE NOUN". Use ES6 template literals.
 
 For example,
@@ -892,37 +892,10 @@ For example,
 > madLib('make', 'best', 'guac');
 "We shall MAKE the BEST GUAC."
 
-[] FizzBuzz
+[x] FizzBuzz
 3 and 5 are magic numbers. Define a function fizzBuzz(array) that takes an array and returns a new array of every number in the array that is divisible by either 3 or 5, but not both.
 
-[] Sum of N Primes
-Using firstNPrimes, write a function sumOfNPrimes(n) that returns the sum of the first n prime numbers. Hint: use isPrime as a helper method.
-
-> sumOfNPrimes(0)
-0
-
-> sumOfNPrimes(1)
-2
-
-> sumOfNPrimes(4)
-17
-
-NOTE: The first few prime numbers are 2, 3, 5, 7, 11, 13, 17, 19, 23 and 29. ..
-
-[] Is Substring
-Input
-1) A String, called searchString.
-2) A String, called subString.
-
-Output: A Boolean. true if the subString is a part of the searchString.
-
-> isSubstring("time to program", "time")
-true
-
-> isSubstring("Jump for joy", "joys")
-false
-
-[] Is Prime
+[x] Is Prime
 Define a function isPrime(number) that returns true if number is prime. Otherwise, false. Assume number is a positive integer.
 
 > isPrime(2)
@@ -937,8 +910,133 @@ true
 > isPrime(3548563)
 false
 
-3-MINUTE WRIST BREAK
+[x] Sum of N Primes
+Using firstNPrimes, write a function sumOfNPrimes(n) that returns the sum of the first n prime numbers. Hint: use isPrime as a helper method.
 
+> sumOfNPrimes(0)
+0
+
+> sumOfNPrimes(1)
+2
+
+> sumOfNPrimes(4)
+17
+
+NOTE: The first few prime numbers are 2, 3, 5, 7, 11, 13, 17, 19, 23 and 29. ..
+
+[x] Is Substring
+Input
+1) A String, called searchString.
+2) A String, called subString.
+
+Output: A Boolean. true if the subString is a part of the searchString.
+
+> isSubstring("time to program", "time")
+true
+
+> isSubstring("Jump for joy", "joys")
+false
+ */
+
+// 3-MINUTE WRIST BREAK
+function getMadLib(verb, adj, noun) {
+  verb = "act".toUpperCase();
+  adj = "proper".toUpperCase();
+  noun = "skilled rebel".toUpperCase();
+
+  return `We shall ${verb} the ${adj} ${noun}!`;
+}
+console.log(getMadLib());
+
+function isMadLib(verb, adj, noun) {
+  verb = verb.toUpperCase();
+  adj = adj.toUpperCase();
+  noun = noun.toUpperCase();
+
+  return `We shall ${verb} the ${adj} ${noun}!!`;
+}
+console.log(isMadLib("eat", "tasty", "cake"));
+
+function madLib(verb, adj, noun) {
+  return `We shall ${verb} the ${adj} ${noun}!`;
+}
+console.log(madLib("fight", "heartless", "opposition").toUpperCase());
+
+function fizzBuzz(array) {
+  const divsBy3Or5Obj = {};
+  const divsBy3 = [];
+  const divsBy5 = [];
+
+  for (const n of array) {
+    if (typeof n === "number") {
+      if (n % 3 === 0 && n % 5 === 0) {
+        continue;
+      } else if (n % 3 === 0) {
+        divsBy3.push(n);
+      } else if (n % 5 === 0) {
+        divsBy5.push(n);
+      }
+    }
+  }
+
+  if (!divsBy3Or5Obj[divsBy3] || !divsBy3Or5Obj[divsBy5]) {
+    const divsBy3Key = "3ers";
+    const divsBy5Key = "5ers";
+
+    divsBy3Or5Obj[divsBy3Key] = divsBy3;
+    divsBy3Or5Obj[divsBy5Key] = divsBy5;
+  }
+  return divsBy3Or5Obj;
+}
+console.log(fizzBuzz([3, "test", 5, 15, 6, 9, 10, 20, 30]));
+
+// standalone fn
+// returns bool
+// ... and is
+// helper fn to following fn
+function isPrimeNum(n) {
+  for (let i = 2, s = Math.sqrt(n); i <= s; i++) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return n > 1;
+}
+console.log(isPrimeNum(2));
+console.log(isPrimeNum(3));
+console.log(isPrimeNum(44));
+
+let sumNPrimes = 0;
+
+function sumNPrimesNums(n) {
+  let sum = 0;
+  let pCount = 0;
+  let i = 2;
+
+  while (pCount < n) {
+    if (isPrimeNum(i)) {
+      sum += i;
+      pCount++;
+    }
+    i++;
+  }
+  return sum;
+}
+console.log(sumNPrimesNums(7));
+
+function isSubOfSearchedString(searchStr, subStr) {
+  if (!searchStr.match(subStr)) {
+    return false;
+  }
+  return true;
+}
+console.log(
+  isSubOfSearchedString(
+    "Competent coders really are passionate about coding",
+    "developers"
+  )
+);
+/*
 [] What are all of the words that can be made from only the letters in “RSTLNE”? Not all of those letters need to be used, and letters can be repeated.
 [] What is the longest word that can be made from only the letters in “RSTLNE”? Not all of those letters need to be used, and letters can be repeated. Make sure your solution can handle ties.
 [] What are all of the words that can be made without the letters in “AEIOSHRTN” (in other words, without the most common letters)? Not all of those letters need to be used, and letters can be repeated. 
