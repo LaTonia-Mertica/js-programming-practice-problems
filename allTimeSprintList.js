@@ -1227,21 +1227,118 @@ function getStringCharCount(phrase) {
   return stringCharCountObj;
 }
 console.log(getStringCharCount("THIS IS A STRING PHRASE!"));
-
 // 3-MINUTE WRIST BREAK
 
 /*
-[] Write a function that takes as an argument a year and returns the winner of the NBA finals that year.
-[] Write a function that takes as an argument a team name and returns an array of all of the years the team has won the NBA finals.
-[] Which teams have made it to the NBA finals but have never won?
-[] Print out a ranking of who has won the MVP more than once, by times won, e.g. this output:
+[x] Write a function that takes as an argument a year and returns the winner of the NBA finals that year.
+[x] Write a function that takes as an argument a team name and returns an array of all of the years the team has won the NBA finals.
+[x] Which teams have made it to the NBA finals but have never won?
+[x] Print out a ranking of who has won the MVP more than once, by times won, e.g. this output:
     - 6 times: Michael Jordan
     - 3 times: Shaquille O'Neal, LeBron James
-    - 2 times: <etc>
+    - 2 times: <etc> */
+const nbaArr = fs
+  .readFileSync("nba_finals.csv")
+  .toString("utf-8")
+  .toUpperCase()
+  .trim()
+  .split("\r\n");
+// console.log({ nbaArr });
 
-3-MINUTE WRIST BREAK
+function getWinnerByYear(y) {
+  let winnerTeam;
+  const winnerByYearObj = {};
 
-[] Print out all of the #1 songs and the artists who made them. If a song was #1 for more than one week, only print it once. Example output:
+  for (const row of nbaArr) {
+    const element = row.split(",");
+    const year = parseInt(element[0]);
+    const winner = element[1];
+
+    if (y === year) {
+      winnerTeam = winner;
+      if (!winnerByYearObj[year]) {
+        winnerByYearObj["year"] = [year, winnerTeam];
+      }
+    }
+  }
+  return winnerByYearObj;
+}
+console.log(getWinnerByYear(1977));
+
+function getYearsWonByTeam(team) {
+  const yearsTeamWonArr = [];
+
+  for (const row of nbaArr) {
+    const element = row.split(",");
+    const year = parseInt(element[0]);
+    const winner = element[1];
+
+    if (team === winner) {
+      yearsTeamWonArr.push(year);
+    }
+  }
+  return team + ": " + yearsTeamWonArr;
+}
+console.log(getYearsWonByTeam("CHICAGO BULLS"));
+
+function getFinalsTeamsThatNeverWon() {
+  const finalsTeams = { winners: [], losers: [] };
+  const finalsTeamsThatNeverWon = {};
+
+  for (const row of nbaArr) {
+    const element = row.split(",");
+    const winner = element[1];
+    const loser = element[2];
+
+    if (loser === "LOSER") {
+      continue;
+    }
+
+    finalsTeams["winners"].push(winner);
+    finalsTeams["losers"].push(loser);
+  }
+
+  for (const team of finalsTeams["losers"]) {
+    if (!finalsTeams["winners"].includes(team)) {
+      finalsTeamsThatNeverWon[team] = "😩";
+    }
+  }
+  return finalsTeamsThatNeverWon;
+}
+console.log(getFinalsTeamsThatNeverWon());
+
+function getMultiMvps() {
+  const allMvps = {};
+  const multiMvps = {};
+
+  for (const row of nbaArr) {
+    const element = row.split(",");
+    const mvp = element[4];
+
+    if (mvp === "MVP" || mvp === "") {
+      continue;
+    } else if (!allMvps[mvp]) {
+      allMvps[mvp] = 1;
+    } else {
+      allMvps[mvp]++;
+    }
+  }
+
+  for (const [key, value] of Object.entries(allMvps)) {
+    if (value >= 2) {
+      if (!multiMvps[value]) {
+        multiMvps[value] = [];
+      }
+      multiMvps[value].push(key);
+    }
+  }
+  return Object.entries(multiMvps).sort().reverse();
+}
+console.log(getMultiMvps());
+// 3-MINUTE WRIST BREAK
+
+/*
+[x] Print out all of the #1 songs and the artists who made them. If a song was #1 for more than one week, only print it once. Example output:
     These were the number one songs of 2000:
     "Try Again" - Aaliyah
     "Say My Name" - Destiny's Child
@@ -1249,22 +1346,431 @@ console.log(getStringCharCount("THIS IS A STRING PHRASE!"));
     "Maria Maria" - Santana Featuring The Product G&B
     "Smooth" - Santana Featuring Rob Thomas
     "Independent Women Part I" - Destiny's Child
-[] What song was the #1 song for the most weeks of 2000, who was the artist, and how many weeks was it at #1?
-[] What artist had the most songs chart in 2000, and what were those songs?
-[] What song(s) were on the charts (anywhere on the charts) for the most weeks of 2000?
+[x] What song was the #1 song for the most weeks of 2000, who was the artist, and how many weeks was it at #1?
+[x] What artist had the most songs chart in 2000, and what were those songs?
+[x] What song(s) were on the charts (anywhere on the charts) for the most weeks of 2000? */
+const billboardArr = fs
+  .readFileSync("billboard100_2000.csv")
+  .toString("utf-8")
+  .toUpperCase()
+  .trim()
+  .split("\n");
+// console.log({ billboardArr });
 
-3-MINUTE WRIST BREAK
+function getArtistAndSongsByRank(r) {
+  const artistAndSongsByRankObj = {};
 
-[] What is the longest word that has no repeating letters?
-[] What are all of the words that are at least 8 letters long and use 3 or fewer different letters? For example, “REFERRER” is an answer to this question, because it uses only 3 different letters: R, E, and F.
-[] What are all of the words that have at least 3 different double letters? For example, “BOOKKEEPER” is an answer to this question because it has a double-O, a double-K, and a double-E.
-[] Write a function that takes a string `availableLetters` as an argument and returns an array of all of the words that can be made from only those letters. Letters can be re-used as many times as needed and can appear in any order. Not all of the letters in `availableLetters` have to be used.
-[ ] Find the longest word and its ties that has each letter it contains no more than once.
-[] What are all of the compound words? These are words made up of 2 smaller words. For example, “SNOWMAN” is a compound word made from “SNOW” and “MAN”, and “BEACHBALL” is a compound word made from “BEACH” and “BALL”.
-[] Find the longest word and its ties that has each letter it contains no more than once.
-[] Finding alphabet chains:
+  for (const row of billboardArr) {
+    const element = row.split(",");
+    const rank = parseInt(element[0]);
+    const song = element[1];
+    const artist = element[2];
+
+    if (rank === "RANK") {
+      continue;
+    }
+
+    if (r === rank) {
+      if (!artistAndSongsByRankObj[artist]) {
+        artistAndSongsByRankObj[artist] = song;
+      }
+    }
+  }
+  return artistAndSongsByRankObj;
+}
+console.log(getArtistAndSongsByRank(1));
+
+function getNum1() {
+  let songNum1;
+  let weeksSongNum1 = 0;
+  let artistOfSongNum1MostWeeks;
+  const num1Obj = {};
+
+  for (const row of billboardArr) {
+    const element = row.split(",");
+    const rank = parseInt(element[0]);
+    const song = element[1];
+    const artist = element[2];
+
+    if (!num1Obj[song]) {
+      num1Obj[song] = 1;
+    } else {
+      num1Obj[song]++;
+    }
+
+    if (num1Obj[song] > weeksSongNum1) {
+      if (rank === 1) {
+        weeksSongNum1 = num1Obj[song];
+        songNum1 = song;
+        artistOfSongNum1MostWeeks = artist;
+      }
+    }
+  }
+  return `SONG '${songNum1}': by ${artistOfSongNum1MostWeeks} NUM 1 for ${weeksSongNum1} WEEKS`;
+}
+console.log(getNum1());
+
+// could serve as helper fn to following
+// though inefficient
+// function getArtistMostCharted() {
+//   let artistCount = 0;
+//   let artistMostCharted;
+//   const artistsToSongsObj = {};
+
+//   for (const row of billboardArr) {
+//     const element = row.split(",");
+//     const song = element[1];
+//     const artist = element[2];
+
+//     if (song === "SONG") {
+//       continue;
+//     }
+
+//     if (!artistsToSongsObj[artist]) {
+//       artistsToSongsObj[artist] = 1;
+//     } else {
+//       artistsToSongsObj[artist]++;
+//     }
+
+//     if (artistsToSongsObj[artist] > artistCount) {
+//       artistCount = artistsToSongsObj[artist];
+//       artistMostCharted = artist;
+//     }
+//   }
+//   return artistMostCharted;
+// }
+// console.log(getArtistMostCharted());
+
+// for (const row of billboardArr) {
+//   const element = row.split(",");
+//   const song = element[1];
+//   const artist = element[2];
+
+//   if (artist === getArtistMostCharted()) {
+//     songs.push(song);
+
+//     if (!artistMostChartedObj[artist]) {
+//       artistMostChartedObj[artist] = songs;
+//     }
+//   }
+// }
+
+let artistCount = 0;
+let artistMostCharted;
+let artistMostChartedSongs = [];
+const artistsToSongsObj = {};
+
+for (const row of billboardArr) {
+  const element = row.split(",");
+  const song = element[1];
+  const artist = element[2];
+
+  if (song === "SONG") {
+    continue;
+  }
+
+  if (!artistsToSongsObj[artist]) {
+    artistsToSongsObj[artist] = 1;
+  } else {
+    artistsToSongsObj[artist]++;
+  }
+
+  if (artistsToSongsObj[artist] > artistCount) {
+    artistCount = artistsToSongsObj[artist];
+    artistMostCharted = artist;
+  }
+}
+console.log({ artistsToSongsObj });
+
+for (const row of billboardArr) {
+  const element = row.split(",");
+  const song = element[1];
+  const artist = element[2];
+
+  if (artist === artistMostCharted) {
+    artistMostChartedSongs.push(song);
+  }
+}
+console.log({ artistMostChartedSongs });
+
+const artistMostChartedObj = {};
+for (artistCount in artistsToSongsObj) {
+  artistMostChartedObj[artistMostCharted] = artistMostChartedSongs;
+}
+console.log({ artistMostChartedObj });
+
+const songToArtistObj = {};
+const songToArtistObjCount = {};
+const topSongsObj = {};
+
+for (const row of billboardArr) {
+  const element = row.split(",");
+  const song = element[1];
+  const artist = element[2];
+
+  songToArtistObj[song] = artist;
+
+  if (!songToArtistObjCount[song]) {
+    songToArtistObjCount[song] = 1;
+  } else {
+    songToArtistObjCount[song]++;
+  }
+}
+
+for (const [key, value] of Object.entries(songToArtistObjCount)) {
+  if (value >= 40) {
+    topSongsObj[key] = "🎤";
+  }
+}
+console.log({ topSongsObj });
+// 3-MINUTE WRIST BREAK
+
+/*
+[x] What is the longest word that has no repeating letters?
+[x] What are all of the words that are at least 8 letters long and use 3 or fewer different letters? For example, “REFERRER” is an answer to this question, because it uses only 3 different letters: R, E, and F.
+[x] What are all of the words that have at least 3 different double letters? For example, “BOOKKEEPER” is an answer to this question because it has a double-O, a double-K, and a double-E.
+[x] Write a function that takes a string `availableLetters` as an argument and returns an array of all of the words that can be made from only those letters. Letters can be re-used as many times as needed and can appear in any order. Not all of the letters in `availableLetters` have to be used.
+[x] What are all of the compound words? These are words made up of 2 smaller words. For example, “SNOWMAN” is a compound word made from “SNOW” and “MAN”, and “BEACHBALL” is a compound word made from “BEACH” and “BALL”.
+[x] Finding alphabet chains:
     - First, what are all of the words that have a least one “A”, one “B”, one “C”, one “D”, one “E”, and one “F” in them, in any order?
         - For example, “FEEDBACK” is an answer to this question
     - Next, is “ABCDEF” the longest alphabet chain that can be found in a word, or is there a longer chain starting somewhere else in the alphabet? Find the longest chain.
-
 */
+const wordBank = fs
+  .readFileSync("sowpods.txt")
+  .toString("utf-8")
+  .toUpperCase()
+  .trim()
+  .split("\n");
+// console.log({ wordBank });
+
+function hasDuplicateLetters(word) {
+  const lettersPerWord = {};
+
+  for (const letter of word) {
+    if (!lettersPerWord[letter]) {
+      lettersPerWord[letter] = 1;
+    } else {
+      lettersPerWord[letter]++;
+      return true;
+    }
+  }
+  return false;
+}
+// console.log(hasDuplicateLetters());
+
+let wordLongestOfSingleLetters;
+let wordsLongestOfSingleLetters = [];
+for (const word of wordBank) {
+  if (hasDuplicateLetters(word) === false) {
+    if (
+      !wordLongestOfSingleLetters ||
+      word.length > wordLongestOfSingleLetters.length
+    ) {
+      wordLongestOfSingleLetters = word;
+      wordsLongestOfSingleLetters = [word];
+    } else if (word.length === wordLongestOfSingleLetters.length) {
+      wordsLongestOfSingleLetters.push(word);
+    }
+  }
+}
+console.log({ wordLongestOfSingleLetters }, { wordsLongestOfSingleLetters });
+
+let wordShortestOfSingleLetters;
+let wordsShortestOfSingleLetters = [];
+for (const word of wordBank) {
+  if (hasDuplicateLetters(word) === false) {
+    if (
+      !wordShortestOfSingleLetters ||
+      word.length < wordShortestOfSingleLetters.length
+    ) {
+      wordShortestOfSingleLetters = word;
+      wordsShortestOfSingleLetters = [word];
+    } else if (word.length === wordShortestOfSingleLetters.length) {
+      wordsShortestOfSingleLetters.push(word);
+    }
+  }
+}
+console.log({ wordShortestOfSingleLetters }, { wordsShortestOfSingleLetters });
+
+const words8LettersOrMoreNoMoreThan3DiffLetters = [];
+for (const word of wordBank) {
+  const uniqueLetters = [];
+
+  if (word.length > 7) {
+    for (const letter of word) {
+      if (!uniqueLetters.includes(letter)) {
+        uniqueLetters.push(letter);
+      }
+    }
+    if (uniqueLetters.length <= 3) {
+      words8LettersOrMoreNoMoreThan3DiffLetters.push(word);
+    }
+  }
+}
+console.log({ words8LettersOrMoreNoMoreThan3DiffLetters });
+
+const wordsOf3OrMoreDiffDoubleLetters = [];
+for (const word of wordBank) {
+  const doubleLetterSets = [];
+  for (let i = 0; i < word.length; i++) {
+    const letter = word[i];
+
+    if (word.includes(letter + letter)) {
+      if (!doubleLetterSets.includes(letter)) {
+        doubleLetterSets.push(letter);
+      }
+    }
+    if (i === word.length - 1) {
+      if (doubleLetterSets.length > 2) {
+        wordsOf3OrMoreDiffDoubleLetters.push(word);
+      }
+    }
+  }
+}
+console.log({ wordsOf3OrMoreDiffDoubleLetters });
+
+function getLetterCountForWord(word) {
+  const letterCountForWord = {};
+
+  for (const letter of word) {
+    if (!letterCountForWord[letter]) {
+      letterCountForWord[letter] = 1;
+    } else {
+      letterCountForWord[letter]++;
+    }
+  }
+  return letterCountForWord;
+}
+// console.log(getLetterCountForWord("SHKYEAL"));
+
+function canCreateWord(availableLetters, wordLetters) {
+  const availableLettersObj = getLetterCountForWord(availableLetters);
+  const wordLettersObj = getLetterCountForWord(wordLetters);
+
+  for (const [key, value] of Object.entries(wordLettersObj)) {
+    if (!availableLettersObj[key] || availableLettersObj[key] < value) {
+      return false;
+    }
+  }
+  return true;
+}
+// console.log(canCreateWord("SHOW", "HOWDY"));
+
+function createdWords(availableLetters) {
+  const createdWords = [];
+
+  for (const word of wordBank) {
+    if (canCreateWord(availableLetters, word)) {
+      createdWords.push(word);
+    }
+  }
+  return createdWords;
+}
+console.log(createdWords("ZOX"));
+
+const sampleWordArray = [
+  "AH",
+  "AHHAH",
+  "AHYEA",
+  "HAH",
+  "IM",
+  "IN",
+  "YEAH",
+  "IMIN",
+];
+const compoundWords = [];
+for (const word of sampleWordArray) {
+  for (let i = 0; i < word.length; i++) {
+    const word1Found = word.slice(0, i + 1);
+    const word2Found = word.slice(i + 1);
+
+    if (
+      sampleWordArray.includes(word1Found) &&
+      sampleWordArray.includes(word2Found)
+    ) {
+      compoundWords.push(word);
+    }
+  }
+}
+console.log({ compoundWords });
+
+const letterChainWords = [];
+wordBank.forEach((word) => {
+  if (
+    word.includes("A") &&
+    word.includes("B") &&
+    word.includes("C") &&
+    word.includes("D") &&
+    word.includes("E") &&
+    word.includes("F")
+  ) {
+    letterChainWords.push(word);
+  }
+});
+console.log({ letterChainWords });
+
+const letters = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
+const longestLetterChainFromA = {};
+let lastIdx = 6;
+const letterChain = letters.slice(0, lastIdx);
+
+for (const word of wordBank) {
+  let hasLetterChain = true;
+  for (const letter of letterChain) {
+    if (!word.includes(letter)) {
+      hasLetterChain = false;
+    } else if (hasLetterChain) {
+      longestLetterChainFromA[letter] = "🔠";
+    }
+  }
+}
+console.log({ longestLetterChainFromA });
+
+const longestLetterChainStartingAtLetterAPlus1Words = [];
+wordBank.forEach((word) => {
+  if (
+    word.includes("A") &&
+    word.includes("B") &&
+    word.includes("C") &&
+    word.includes("D") &&
+    word.includes("E") &&
+    word.includes("F") &&
+    word.includes("G")
+  ) {
+    longestLetterChainStartingAtLetterAPlus1Words.push(word);
+  }
+});
+
+if (longestLetterChainStartingAtLetterAPlus1Words.length !== 0) {
+  console.log({ longestLetterChainStartingAtLetterAPlus1Words });
+} else {
+  console.log("LETTER CHAIN FROM LETTER A TO LETTER G RETURNS:", []);
+}
