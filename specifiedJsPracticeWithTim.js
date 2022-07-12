@@ -37,15 +37,17 @@ console.log("\nBASIC ZIP FN\n", zipArrays([1, 2, 3], ["A", "B", "C"]), "\n");
 
 function zipArrays(arr1, arr2) {
   const result = [];
+
+  if (arr2.length > arr1.length) {
+    let diff = arr2.length - arr1.length;
+    diff = null;
+    arr1.push(diff);
+  }
+
   for (let i = 0; i < arr1.length; i++) {
     let idxNum = arr1[i],
       idxLet = arr2[i];
 
-    if (arr2.length > arr1.length) {
-      let diff = arr2.length - arr1.length;
-      diff = null;
-      arr1.push(diff);
-    }
     if (idxNum === undefined) {
       idxNum = null;
     }
