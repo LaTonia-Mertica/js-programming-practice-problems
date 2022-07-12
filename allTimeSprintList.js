@@ -65,7 +65,7 @@ sowpodsArray.forEach((word) => {
 console.log({ wordsNoEOrAAtLeast15Letters });
 
 const wordsBAndXUnder5Letters = [];
-sowpodsArray.forEach((word) => {
+sowpodsArray.forEach(function (word) {
   if (word.length < 5 && word.includes("B") && word.includes("X")) {
     wordsBAndXUnder5Letters.push(word);
   }
