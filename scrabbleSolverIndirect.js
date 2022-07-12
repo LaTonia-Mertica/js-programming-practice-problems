@@ -1,4 +1,3 @@
-// object with scores
 const scores = {
   A: 1,
   B: 3,
@@ -29,15 +28,6 @@ const scores = {
   _: 0,
 };
 
-/*
-THE GOAL:
-- helper fn to get count of letters
-*/
-// fn
-// input one string
-// creates letter object
-// outputs object with key-value pairs of letter to letter frequency
-
 function countOfLettersByWord(str) {
   const lettersObj = {};
   for (const letter of str) {
@@ -49,29 +39,16 @@ function countOfLettersByWord(str) {
   }
   return lettersObj;
 }
-// console.log(countOfLettersByWord("MAKSHEF___ISHJYESBT"));
-
-/*
-THE GOAL:
-- helper fn to get if inputted word can be made
-- input of two objs
-- output bool re: whether word can be made
-*/
-// fn
-// two params that are both an obj
-// lettersObj: an object that contains available letters in scrabble rack
-// inputObj: an object that contains the word you want to check against the rack
-// checks if input can be created per available chars/letters in letters object
-// isValidWord fn returns bool re: whether can make the word
 
 function isValidWord(lettersObj, inputObj) {
   let numBlanks = 0;
   if (lettersObj["_"]) {
     numBlanks = lettersObj["_"];
   }
+
   for (const [key, value] of Object.entries(inputObj)) {
     if (!lettersObj[key] || lettersObj[key] < value) {
-      if (numBlanks < 1) {
+      if (numBlanks < value) {
         return false;
       }
       numBlanks--;
@@ -79,28 +56,14 @@ function isValidWord(lettersObj, inputObj) {
   }
   return true;
 }
-const lettersObj = countOfLettersByWord("_T____T");
-const inputObj = countOfLettersByWord("ATTEMPT");
-// console.log(isValidWord(lettersObj, inputObj));
-
-/*
-THE GOAL:
-- fn
-- input a string
-- creates letter to letter frequency object for letters available and each word in data source array
-- checks if word(s) can be created from letters available
-- tallies and assigns score to words made
-- return array containing word with its score 
-*/
 
 const fs = require("fs");
-const arrayOfScrabbleWords = fs
+const sowpodsWords = fs
   .readFileSync("sowpods.txt")
   .toString("utf-8")
   .toUpperCase()
   .trim()
   .split("\n");
-// console.log({ arrayOfScrabbleWords });
 
 // manageable data source array
 // const wordList = [
@@ -119,7 +82,8 @@ const arrayOfScrabbleWords = fs
 //   "SEEYA",
 // ];
 
-function getWordsCanCreate(availableLetters) {
+// const testWords = ["AA", "ZZZ", "LET"];
+function getWordsCanCreate(availableLetters, arrayOfScrabbleWords) {
   const wordsMade = [];
   const availableLettersObj = countOfLettersByWord(availableLetters);
 
@@ -140,16 +104,4 @@ function getWordsCanCreate(availableLetters) {
   }
   return wordWithScoreArr;
 }
-console.log(getWordsCanCreate("L_T"));
-
-/*
-THE GOAL: INCORPORATE BLANK TILES
-
-Extend the script to handle blank tiles. When reading the input, the character _ can be used as a wildcard — it can represent any letter.
-
-Wildcards do not count towards a word's score.
-
-- tell program that underscore symbol means any letter can be used in that place
-- assign value of wild card to zero
-- handle up to as many blank tiles as are added
-*/
+console.log(getWordsCanCreate("L_T", sowpodsWords));
