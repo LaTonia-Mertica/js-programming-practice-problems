@@ -117,11 +117,11 @@ function getWordsCanCreate(availableLetters) {
   let scoreSort = [];
   for (const obj of wordScores) {
     scoreSort.push([obj.score, obj.word]);
-    scoreSort = scoreSort.sort(function (a, b) {
-      return b[0] - a[0];
-    });
   }
+  scoreSort = scoreSort.sort(function (a, b) {
+    return b[0] - a[0];
+  });
 
   return scoreSort;
 }
-console.log(getWordsCanCreate("x_y"));
+console.log(getWordsCanCreate("x_z"));
