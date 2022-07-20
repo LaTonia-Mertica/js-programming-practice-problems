@@ -83,6 +83,8 @@ readlines();
 
 ###### [- get into algorithms notes for professionals](AlgorithmsNotesForProfessionals.pdf)
 
+###### [- understanding tokenization of elements](https://www.nan.fyi/tokenizer)
+
 <br>
 <br>
 
