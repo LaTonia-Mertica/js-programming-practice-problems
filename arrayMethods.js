@@ -99,3 +99,49 @@ function deleteTodo(arr, id) {
   return arr.filter((td) => id !== td.id);
 }
 console.log(deleteTodo(listedTodos, 3));
+
+const todos = [
+  { id: 1, task: "Take out trash", isCompleted: false },
+  { id: 2, task: "Walk the dog", isCompleted: false },
+  { id: 3, task: "Buy groceries", isCompleted: false },
+];
+
+function markTodoComplete(todos, id) {
+  // map
+  // return new array of todos with todo id passed marked as done
+  return todos.map((token) => {
+    if (id === token.id) {
+      token.isCompleted = true;
+    }
+    return token;
+  });
+}
+console.log(markTodoComplete(todos, 1));
+
+function markTodosComplete(todos, id) {
+  return todos.map((token) =>
+    id === token.id ? { ...token, isCompleted: true } : token
+  );
+}
+console.log(markTodosComplete(todos, 2));
+
+function markTodoComplete(todos) {
+  return todos.map((token) => {
+    return { ...token, isCompleted: true };
+  });
+}
+console.log(markTodoComplete(todos));
+
+function sortHighestToLowestById(todos) {
+  return todos.sort((a, b) => b.id - a.id);
+}
+console.log(sortHighestToLowestById(todos));
+
+// more verbose code block means more control of sorting
+// alphabetically based on task
+// localeCompare
+
+function sortByTask(todos) {
+  return todos.sort((a, b) => b.task.localeCompare(a.task));
+}
+console.log(sortByTask(todos));
